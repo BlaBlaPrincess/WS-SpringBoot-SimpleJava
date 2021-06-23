@@ -12,26 +12,71 @@ import java.util.List;
 public class ArrayCountingAlgorithmsPresenter<T> {
 
     private final List<ArrayCountingAlgorithm<T>> algorithms;
+    private final StringBuilder builder;
+    private T[] array;
 
     @Autowired
     public ArrayCountingAlgorithmsPresenter(List<ArrayCountingAlgorithm<T>> algorithms){
         this.algorithms = algorithms;
+        builder = new StringBuilder();
     }
 
-    public String Present(T[] array) {
-        StringBuilder result = new StringBuilder();
-        result.append(String.format("Counting algorithms for %s", array.getClass().getSimpleName()));
+    public ArrayCountingAlgorithmsPresenter<T> setup(T[] array) {
+        this.array = array;
+        builder.setLength(0);
+        return this;
+    }
 
-        if (algorithms.size() == 0) {
-            result.append(" not found");
-            return result.toString();
+    private void breakLine() {
+        if (builder.length() != 0) {
+            builder.append(String.format("%n"));
         }
+    }
 
-        result.append(String.format(": %d%n%nArray: %s%n", algorithms.size(), Arrays.toString(array)));
+    public ArrayCountingAlgorithmsPresenter<T> withAlgorithmsCount() {
+        breakLine();
+        builder.append(String.format("Counting algorithms for %s", array.getClass().getSimpleName()));
+        builder.append(algorithms.size() == 0 ? " not found" : String.format(": %d", algorithms.size()));
+        return this;
+    }
+
+    public ArrayCountingAlgorithmsPresenter<T> withAlgorithmsList() {
+        breakLine();
+        builder.append(String.format("Algorithms:%n"));
         for (var alg : algorithms) {
-            result.append(String.format("%n%s: %.2f", alg.getClass().getSimpleName(), alg.count(array)));
+            builder.append(String.format("%n-%s", alg.getClass().getSimpleName()));
         }
-        return result.toString();
+        return this;
+    }
+
+    public ArrayCountingAlgorithmsPresenter<T> withArray() {
+        breakLine();
+        builder.append(String.format("Array: %s%n", Arrays.toString(array)));
+        return this;
+    }
+
+    public ArrayCountingAlgorithmsPresenter<T> withCounts() {
+        breakLine();
+        for (var alg : algorithms) {
+            builder.append(String.format("%n%s: %.2f", alg.getClass().getSimpleName(), alg.count(array)));
+        }
+        return this;
+    }
+
+    public ArrayCountingAlgorithmsPresenter<T> withSeparator(String separator) {
+        breakLine();
+        builder.append(separator);
+        return this;
+    }
+
+    public ArrayCountingAlgorithmsPresenter<T> withSeparator() {
+        breakLine();
+        return this;
+    }
+
+    @Override
+    public String toString() {
+        return builder.toString();
     }
 
 }
