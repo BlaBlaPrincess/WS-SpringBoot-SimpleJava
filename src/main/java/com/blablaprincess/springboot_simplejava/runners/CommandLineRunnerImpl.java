@@ -42,9 +42,8 @@ public class CommandLineRunnerImpl implements CommandLineRunner {
                 break;
             }
 
-            var intArray = DigitsRepresentation.getDigitsArray(number);
-            var integerArray = Arrays.stream(intArray).boxed().toArray(Integer[]::new);
-            presenter.setup(integerArray).withCounts();
+            var array = DigitsRepresentation.getDigitsArray(number);
+            presenter.setup(array).withCounts();
             System.out.println(presenter);
         }
 

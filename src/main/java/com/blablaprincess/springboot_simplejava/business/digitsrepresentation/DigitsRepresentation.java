@@ -1,16 +1,17 @@
 package com.blablaprincess.springboot_simplejava.business.digitsrepresentation;
 
+import com.blablaprincess.springboot_simplejava.common.IntHelper;
 import lombok.var;
 
 public class DigitsRepresentation {
 
-    public static int[] getDigitsArray(int number) {
-        number = Math.abs(number);
-        var length = number == 0 ? 1 : (int)(Math.log10(number) + 1);
-        var array = new int[length];
+    public static Integer[] getDigitsArray(int number) {
+        int abs = Math.abs(number);
+        var length = IntHelper.getLength(abs);
+        var array = new Integer[length];
         for (int i = 0; i < length; i++) {
-            array[length - i - 1] = number % 10;
-            number /= 10;
+            array[length - i - 1] = abs % 10;
+            abs /= 10;
         }
         return array;
     }

@@ -12,10 +12,10 @@ class DigitsRepresentationTests {
         int number = 8721654;
 
         // Act
-        int[] result = DigitsRepresentation.getDigitsArray(number);
+        Integer[] result = DigitsRepresentation.getDigitsArray(number);
 
         // Assert
-        assertArrayEquals(new int[]{8, 7, 2, 1, 6, 5, 4}, result);
+        assertArrayEquals(new Integer[]{8, 7, 2, 1, 6, 5, 4}, result);
     }
 
     @Test
@@ -24,10 +24,10 @@ class DigitsRepresentationTests {
         int number = -21415;
 
         // Act
-        int[] result = DigitsRepresentation.getDigitsArray(number);
+        Integer[] result = DigitsRepresentation.getDigitsArray(number);
 
         // Assert
-        assertArrayEquals(new int[]{2, 1, 4, 1, 5}, result);
+        assertArrayEquals(new Integer[]{2, 1, 4, 1, 5}, result);
     }
 
     @Test
@@ -36,22 +36,10 @@ class DigitsRepresentationTests {
         int number = 1;
 
         // Act
-        int[] result = DigitsRepresentation.getDigitsArray(number);
+        Integer[] result = DigitsRepresentation.getDigitsArray(number);
 
         // Assert
-        assertArrayEquals(new int[]{1}, result);
-    }
-
-    @Test
-    void getDigitsArray_Zero_Equals(){
-        // Arrange
-        int number = 0;
-
-        // Act
-        int[] result = DigitsRepresentation.getDigitsArray(number);
-
-        // Assert
-        assertArrayEquals(new int[]{0}, result);
+        assertArrayEquals(new Integer[]{1}, result);
     }
 
 }
