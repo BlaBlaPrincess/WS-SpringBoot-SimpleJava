@@ -33,23 +33,20 @@ public class CommandLineRunnerImpl implements CommandLineRunner {
         System.out.printf("%n=========================%n%n");
         System.out.println("Type not a int for out of cycle.");
 
-        var scanner = new Scanner(System.in);
-        int number;
-        while (true) {
-            System.out.printf("%nNumber: ");
-
-            try {
+        try (var scanner = new Scanner(System.in)) {
+            int number;
+            //noinspection InfiniteLoopStatement
+            while (true) {
+                System.out.printf("%nNumber: ");
                 number =  scanner.nextInt();
-            } catch (Exception e){
-                break;
+
+                var array = DigitsRepresentation.getDigitsArray(number);
+                presenter.setup(array).withCounts();
+                System.out.println(presenter);
             }
-
-            var array = DigitsRepresentation.getDigitsArray(number);
-            presenter.setup(array).withCounts();
-            System.out.println(presenter);
+        } catch (Exception e) {
+            System.out.printf("%nCycle interrupted.%n");
         }
-
-        System.out.printf("%nCycle interrupted.%n");
     }
 
 }
