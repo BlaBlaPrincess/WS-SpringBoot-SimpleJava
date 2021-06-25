@@ -7,7 +7,7 @@ import static org.junit.jupiter.api.Assertions.*;
 class IntegersMaxTests {
 
     @Test
-    void count_PositiveSet_5() {
+    void countWithPositiveSet() {
         // Arrange
         Integer[] set = {1, 2, 3, 4, 5, 5};
 
@@ -19,7 +19,7 @@ class IntegersMaxTests {
     }
 
     @Test
-    void count_NegativeSet_20() {
+    void countWithMixedSet() {
         // Arrange
         Integer[] set = {20, -10};
 
@@ -31,7 +31,7 @@ class IntegersMaxTests {
     }
 
     @Test
-    void count_EmptySet_ThrowsIllegalArgumentException() {
+    void countWithEmptySetThrowsIllegalArgumentException() {
         // Arrange
         Integer[] set = {};
 

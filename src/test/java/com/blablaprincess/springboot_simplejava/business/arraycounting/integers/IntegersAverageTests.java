@@ -7,7 +7,7 @@ import static org.junit.jupiter.api.Assertions.*;
 class IntegersAverageTests {
 
     @Test
-    void count_PositiveSet_4() {
+    void countWithPositiveSet() {
         // Arrange
         Integer[] set = {1, 2, 3, 4, 10};
 
@@ -19,7 +19,7 @@ class IntegersAverageTests {
     }
 
     @Test
-    void count_MixedSet_5() {
+    void countWithMixedSet() {
         // Arrange
         Integer[] set = {20, -10};
 
@@ -31,7 +31,7 @@ class IntegersAverageTests {
     }
 
     @Test
-    void count_EmptySet_0() {
+    void countWithEmptySet() {
         // Arrange
         Integer[] set = {};
 

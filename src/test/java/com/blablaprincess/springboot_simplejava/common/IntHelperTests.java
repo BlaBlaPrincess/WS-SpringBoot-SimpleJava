@@ -4,10 +4,10 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class IntHelperTest {
+class IntHelperTests {
 
     @Test
-    void getLength_PositiveNum_3(){
+    void getLengthWithPositiveNum(){
         // Arrange
         int num = 150;
 
@@ -19,7 +19,7 @@ class IntHelperTest {
     }
 
     @Test
-    void getLength_NegativeNum_1(){
+    void getLengthWithNegativeNum(){
         // Arrange
         int num = -5;
 
@@ -31,7 +31,7 @@ class IntHelperTest {
     }
 
     @Test
-    void getLength_Zero_1(){
+    void getLengthWithZero(){
         // Arrange
         int num = 0;
 
