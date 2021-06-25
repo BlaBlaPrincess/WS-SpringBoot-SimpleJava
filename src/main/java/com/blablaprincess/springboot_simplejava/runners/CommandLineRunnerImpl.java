@@ -5,10 +5,12 @@ import com.blablaprincess.springboot_simplejava.business.digitsrepresentation.Di
 import lombok.var;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
+import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Component;
 
 import java.util.Scanner;
 
+@Profile("!test")
 @Component
 public class CommandLineRunnerImpl implements CommandLineRunner {
 
