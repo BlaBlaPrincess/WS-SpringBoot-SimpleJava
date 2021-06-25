@@ -12,7 +12,9 @@ public class IntegersMin implements ArrayCountingAlgorithm<Integer> {
 
     @Override
     public double count(Integer[] array) {
-        return Arrays.stream(array).min(Integer::compareTo).orElseThrow(IllegalArgumentException::new);
+        return Arrays.stream(array)
+                     .min(Integer::compareTo)
+                     .orElseThrow(IllegalArgumentException::new);
     }
 
 }

@@ -17,7 +17,9 @@ public class IntegersAverage implements ArrayCountingAlgorithm<Integer> {
         if (count == 0) {
             throw new ArithmeticException();
         }
-        return (double) Arrays.stream(array).mapToInt(Integer::intValue).sum() / count;
+        return (double) Arrays.stream(array)
+                              .mapToInt(Integer::intValue)
+                              .sum() / count;
     }
 
 }

@@ -12,7 +12,9 @@ public class IntegersMax implements ArrayCountingAlgorithm<Integer> {
 
     @Override
     public double count(Integer[] array) {
-        return Arrays.stream(array).max(Integer::compareTo).orElseThrow(IllegalArgumentException::new);
+        return Arrays.stream(array)
+                     .max(Integer::compareTo)
+                     .orElseThrow(IllegalArgumentException::new);
     }
 
 }

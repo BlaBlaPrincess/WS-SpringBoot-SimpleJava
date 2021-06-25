@@ -12,7 +12,9 @@ public class IntegersSum implements ArrayCountingAlgorithm<Integer> {
 
     @Override
     public double count(Integer[] array) {
-        return Arrays.stream(array).mapToInt(Integer::intValue).sum();
+        return Arrays.stream(array)
+                     .mapToInt(Integer::intValue)
+                     .sum();
     }
 
 }
