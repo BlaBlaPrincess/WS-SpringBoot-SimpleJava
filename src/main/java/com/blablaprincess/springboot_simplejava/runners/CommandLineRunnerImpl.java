@@ -23,16 +23,7 @@ public class CommandLineRunnerImpl implements CommandLineRunner {
 
     @Override
     public void run(String... args) throws Exception {
-        System.out.println();
-        presenter.setup(new Integer[]{})
-                 .withAlgorithmsCount()
-                 .withSeparator()
-                 .withAlgorithmsList();
-        System.out.println(presenter);
-
-        System.out.printf("%n=========================%n%n");
-        System.out.println("Type not a int for out of cycle.");
-
+        System.out.printf("%nType not a int for out of cycle.%n");
         try (var scanner = new Scanner(System.in)) {
             int number;
             //noinspection InfiniteLoopStatement
@@ -41,8 +32,7 @@ public class CommandLineRunnerImpl implements CommandLineRunner {
                 number =  scanner.nextInt();
 
                 var array = DigitsRepresentation.getDigitsArray(number);
-                presenter.setup(array).withCounts();
-                System.out.println(presenter);
+                System.out.println(presenter.present(array));
             }
         } catch (Exception e) {
             System.out.printf("%nCycle interrupted.%n");
