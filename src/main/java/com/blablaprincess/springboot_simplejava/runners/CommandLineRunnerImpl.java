@@ -2,8 +2,8 @@ package com.blablaprincess.springboot_simplejava.runners;
 
 import com.blablaprincess.springboot_simplejava.business.arraycounting.presenters.ArrayCountingAlgorithmsPresenter;
 import com.blablaprincess.springboot_simplejava.business.digitsrepresentation.DigitsRepresentation;
+import lombok.RequiredArgsConstructor;
 import lombok.var;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Component;
@@ -12,14 +12,10 @@ import java.util.Scanner;
 
 @Profile("!test")
 @Component
+@RequiredArgsConstructor
 public class CommandLineRunnerImpl implements CommandLineRunner {
 
     private final ArrayCountingAlgorithmsPresenter<Integer> presenter;
-
-    @Autowired
-    public CommandLineRunnerImpl(ArrayCountingAlgorithmsPresenter<Integer> presenter) {
-        this.presenter = presenter;
-    }
 
     @Override
     public void run(String... args) throws Exception {
