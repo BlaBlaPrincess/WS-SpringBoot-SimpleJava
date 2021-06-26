@@ -5,7 +5,6 @@ import com.blablaprincess.springboot_simplejava.business.arraycounting.presenter
 import lombok.var;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.stereotype.Component;
-import org.springframework.util.StringUtils;
 
 @Component
 @ConditionalOnProperty(name = "ca_presenter_formatter", havingValue = "text")
