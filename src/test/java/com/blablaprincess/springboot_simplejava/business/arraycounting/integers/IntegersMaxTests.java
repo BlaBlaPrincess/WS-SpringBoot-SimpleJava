@@ -6,13 +6,15 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class IntegersMaxTests {
 
+    private final IntegersMax integersMax = new IntegersMax();
+
     @Test
     void countWithPositiveSet() {
         // Arrange
         Integer[] set = {1, 2, 3, 4, 5, 5};
 
         // Act
-        double result = new IntegersMax().count(set);
+        double result = integersMax.count(set);
 
         // Assert
         assertEquals(5, result);
@@ -24,7 +26,7 @@ class IntegersMaxTests {
         Integer[] set = {20, -10};
 
         // Act
-        double result = new IntegersMax().count(set);
+        double result = integersMax.count(set);
 
         // Assert
         assertEquals(20, result);
@@ -36,7 +38,7 @@ class IntegersMaxTests {
         Integer[] set = {};
 
         // Act + Assert
-        assertThrows(IllegalArgumentException.class, () -> new IntegersMax().count(set));
+        assertThrows(IllegalArgumentException.class, () -> integersMax.count(set));
     }
 
 }

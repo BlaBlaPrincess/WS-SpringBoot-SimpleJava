@@ -6,13 +6,15 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class IntegersSumTests {
 
+    private final IntegersSum integersSum = new IntegersSum();
+
     @Test
     void countWithPositiveSet() {
         // Arrange
         Integer[] set = {1, 2, 3, 4, 5, 5};
 
         // Act
-        double result = new IntegersSum().count(set);
+        double result = integersSum.count(set);
 
         // Assert
         assertEquals(20, result);
@@ -24,7 +26,7 @@ class IntegersSumTests {
         Integer[] set = {20, -10};
 
         // Act
-        double result = new IntegersSum().count(set);
+        double result = integersSum.count(set);
 
         // Assert
         assertEquals(10, result);
@@ -36,7 +38,7 @@ class IntegersSumTests {
         Integer[] set = {};
 
         // Act
-        double result = new IntegersSum().count(set);
+        double result = integersSum.count(set);
 
         // Assert
         assertEquals(0, result);

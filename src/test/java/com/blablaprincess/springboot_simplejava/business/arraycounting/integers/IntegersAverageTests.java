@@ -6,13 +6,15 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class IntegersAverageTests {
 
+    private final IntegersAverage integersAverage = new IntegersAverage();
+
     @Test
     void countWithPositiveSet() {
         // Arrange
         Integer[] set = {1, 2, 3, 4, 10};
 
         // Act
-        double result = new IntegersAverage().count(set);
+        double result = integersAverage.count(set);
 
         // Assert
         assertEquals(4, result);
@@ -24,7 +26,7 @@ class IntegersAverageTests {
         Integer[] set = {20, -10};
 
         // Act
-        double result = new IntegersAverage().count(set);
+        double result = integersAverage.count(set);
 
         // Assert
         assertEquals(5, result);
@@ -36,7 +38,7 @@ class IntegersAverageTests {
         Integer[] set = {};
 
         // Act + Assert
-        assertThrows(ArithmeticException.class, () -> new IntegersAverage().count(set));
+        assertThrows(ArithmeticException.class, () -> integersAverage.count(set));
     }
 
 }
