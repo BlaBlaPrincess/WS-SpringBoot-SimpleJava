@@ -7,7 +7,7 @@ import org.springframework.stereotype.Component;
 import java.util.Arrays;
 
 @Component
-@ConditionalOnProperty(name = "integers_counting_algorithms_presenter.max", havingValue = "true")
+@ConditionalOnProperty(name = "count_alg.int.max.enabled", havingValue = "true")
 public class IntegersMax implements ArrayCountingAlgorithm<Integer> {
 
     @Override

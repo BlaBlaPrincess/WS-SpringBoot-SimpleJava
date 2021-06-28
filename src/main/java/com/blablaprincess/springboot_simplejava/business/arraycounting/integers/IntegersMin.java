@@ -7,7 +7,7 @@ import org.springframework.stereotype.Component;
 import java.util.Arrays;
 
 @Component
-@ConditionalOnProperty(name = "integers_counting_algorithms_presenter.min", havingValue = "true")
+@ConditionalOnProperty(name = "count_alg.int.min.enabled", havingValue = "true")
 public class IntegersMin implements ArrayCountingAlgorithm<Integer> {
 
     @Override

@@ -8,7 +8,7 @@ import org.springframework.stereotype.Component;
 import java.util.Arrays;
 
 @Component
-@ConditionalOnProperty(name = "integers_counting_algorithms_presenter.average", havingValue = "true")
+@ConditionalOnProperty(name = "count_alg.int.average.enabled", havingValue = "true")
 public class IntegersAverage implements ArrayCountingAlgorithm<Integer> {
 
     @Override
