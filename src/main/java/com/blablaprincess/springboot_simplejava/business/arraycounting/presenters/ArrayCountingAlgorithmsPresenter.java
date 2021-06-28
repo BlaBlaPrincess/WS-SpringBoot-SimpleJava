@@ -16,6 +16,14 @@ public class ArrayCountingAlgorithmsPresenter<T> {
     private final List<ArrayCountingAlgorithm<T>> algorithms;
     private final ArrayCountingAlgorithmsPresenterDataFormatter formatter;
 
+    public String present(T[] array) {
+        ArrayCountingAlgorithmsPresenterData data
+                = ArrayCountingAlgorithmsPresenterData.builder()
+                                                      .counts(getAlgorithmsCounts(array))
+                                                      .build();
+        return formatter.format(data);
+    }
+
     private Map<String, Double> getAlgorithmsCounts(T[] array) {
         var counts = new HashMap<String, Double>();
         for (var alg : algorithms) {
@@ -24,16 +32,6 @@ public class ArrayCountingAlgorithmsPresenter<T> {
                        alg.count(array));
         }
         return counts;
-    }
-
-    private ArrayCountingAlgorithmsPresenterData getInfo(T[] array) {
-        return ArrayCountingAlgorithmsPresenterData.builder()
-                                                   .counts(getAlgorithmsCounts(array))
-                                                   .build();
-    }
-
-    public String present(T[] array) {
-        return formatter.format(getInfo(array));
     }
 
 }
