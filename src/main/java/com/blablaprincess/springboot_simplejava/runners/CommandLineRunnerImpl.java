@@ -30,7 +30,7 @@ public class CommandLineRunnerImpl implements CommandLineRunner {
                 number =  scanner.nextInt();
 
                 var array = DigitsRepresentation.getDigitsArray(number);
-                System.out.println(formatter.format(presenter.present(array)));
+                System.out.println(formatter.format(presenter.getAlgorithmsCounts(array)));
             }
         } catch (Exception e) {
             System.out.printf("%nCycle interrupted.%n");
