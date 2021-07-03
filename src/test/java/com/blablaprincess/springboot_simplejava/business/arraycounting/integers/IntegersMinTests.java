@@ -1,6 +1,6 @@
 package com.blablaprincess.springboot_simplejava.business.arraycounting.integers;
 
-import com.blablaprincess.springboot_simplejava.common.exceptions.EmptyArrayException;
+import com.blablaprincess.springboot_simplejava.business.common.exceptions.EmptyArrayException;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;

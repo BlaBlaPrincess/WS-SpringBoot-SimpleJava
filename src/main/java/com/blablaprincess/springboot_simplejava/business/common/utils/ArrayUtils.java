@@ -1,6 +1,6 @@
-package com.blablaprincess.springboot_simplejava.common.utils;
+package com.blablaprincess.springboot_simplejava.business.common.utils;
 
-import com.blablaprincess.springboot_simplejava.common.exceptions.EmptyArrayException;
+import com.blablaprincess.springboot_simplejava.business.common.exceptions.EmptyArrayException;
 
 public class ArrayUtils {
 

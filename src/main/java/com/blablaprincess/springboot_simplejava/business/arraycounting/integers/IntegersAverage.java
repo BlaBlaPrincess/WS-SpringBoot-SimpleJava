@@ -1,7 +1,7 @@
 package com.blablaprincess.springboot_simplejava.business.arraycounting.integers;
 
 import com.blablaprincess.springboot_simplejava.business.arraycounting.ArrayCountingAlgorithm;
-import com.blablaprincess.springboot_simplejava.common.utils.ArrayUtils;
+import com.blablaprincess.springboot_simplejava.business.common.utils.ArrayUtils;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.stereotype.Component;
 

@@ -1,4 +1,4 @@
-package com.blablaprincess.springboot_simplejava.common.utils;
+package com.blablaprincess.springboot_simplejava.business.common.utils;
 
 import org.junit.jupiter.api.Test;
 

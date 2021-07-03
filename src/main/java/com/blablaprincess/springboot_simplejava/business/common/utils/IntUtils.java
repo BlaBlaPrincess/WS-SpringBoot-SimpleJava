@@ -1,4 +1,4 @@
-package com.blablaprincess.springboot_simplejava.common.utils;
+package com.blablaprincess.springboot_simplejava.business.common.utils;
 
 public class IntUtils {
     public static int getLength(int number) {

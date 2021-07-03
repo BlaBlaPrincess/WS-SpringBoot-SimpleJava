@@ -1,4 +1,4 @@
-package com.blablaprincess.springboot_simplejava.common.exceptions;
+package com.blablaprincess.springboot_simplejava.business.common.exceptions;
 
 public class EmptyArrayException extends RuntimeException {
 
