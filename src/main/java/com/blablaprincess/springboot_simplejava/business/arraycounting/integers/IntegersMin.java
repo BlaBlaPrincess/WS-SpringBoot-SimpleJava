@@ -1,6 +1,7 @@
 package com.blablaprincess.springboot_simplejava.business.arraycounting.integers;
 
 import com.blablaprincess.springboot_simplejava.business.arraycounting.ArrayCountingAlgorithm;
+import com.blablaprincess.springboot_simplejava.business.arraycounting.UnexpectedArrayCountingException;
 import com.blablaprincess.springboot_simplejava.common.utils.ArrayUtils;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.stereotype.Component;
@@ -16,7 +17,7 @@ public class IntegersMin implements ArrayCountingAlgorithm<Integer> {
         ArrayUtils.ValidateArrayNotEmpty(array);
         return Arrays.stream(array)
                      .min(Integer::compareTo)
-                     .orElseThrow(IllegalArgumentException::new);
+                     .orElseThrow(UnexpectedArrayCountingException::new);
     }
 
 }
