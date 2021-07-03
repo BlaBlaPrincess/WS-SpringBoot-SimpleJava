@@ -1,5 +1,6 @@
 package com.blablaprincess.springboot_simplejava.business.arraycounting.integers;
 
+import com.blablaprincess.springboot_simplejava.common.exceptions.EmptyArrayException;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -38,7 +39,7 @@ class IntegersAverageTests {
         Integer[] set = {};
 
         // Act + Assert
-        assertThrows(ArithmeticException.class, () -> integersAverage.count(set));
+        assertThrows(EmptyArrayException.class, () -> integersAverage.count(set));
     }
 
 }
