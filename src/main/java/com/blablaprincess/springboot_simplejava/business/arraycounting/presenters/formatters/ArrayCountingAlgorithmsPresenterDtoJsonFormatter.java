@@ -8,7 +8,7 @@ import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.stereotype.Component;
 
 @Component
-@ConditionalOnProperty(name = "count_alg.presenter.format", havingValue = "json", matchIfMissing = true)
+@ConditionalOnProperty(name = "count-alg.presenter.format", havingValue = "json", matchIfMissing = true)
 public class ArrayCountingAlgorithmsPresenterDtoJsonFormatter
         implements ArrayCountingAlgorithmsPresenterDtoFormatter {
 

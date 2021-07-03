@@ -7,7 +7,7 @@ import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.stereotype.Component;
 
 @Component
-@ConditionalOnProperty(name = "count_alg.presenter.format", havingValue = "text")
+@ConditionalOnProperty(name = "count-alg.presenter.format", havingValue = "text")
 public class ArrayCountingAlgorithmsPresenterDtoTextFormatter
         implements ArrayCountingAlgorithmsPresenterDtoFormatter {
 

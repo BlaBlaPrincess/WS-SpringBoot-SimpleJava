@@ -9,7 +9,7 @@ import org.springframework.stereotype.Component;
 import java.util.Arrays;
 
 @Component
-@ConditionalOnProperty(name = "count_alg.int.max.enabled", havingValue = "true")
+@ConditionalOnProperty(name = "count-alg.int.max.enabled", havingValue = "true")
 public class IntegersMax implements ArrayCountingAlgorithm<Integer> {
 
     @Override
