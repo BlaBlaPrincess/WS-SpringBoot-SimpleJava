@@ -27,4 +27,12 @@ public class ArrayCountingAlgorithmsPresenter<T> {
                                                   .build();
     }
 
+    public String[] getAlgorithms() {
+        var result = new String[algorithms.size()];
+        for (int i = 0; i < algorithms.size(); i++) {
+            result[i] = algorithms.get(i).getClass().getSimpleName();
+        }
+        return result;
+    }
+
 }
