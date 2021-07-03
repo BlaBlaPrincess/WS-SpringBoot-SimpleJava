@@ -1,6 +1,6 @@
 package com.blablaprincess.springboot_simplejava.runners;
 
-import com.blablaprincess.springboot_simplejava.business.arraycounting.presenters.ArrayCountingAlgorithmsPresenter;
+import com.blablaprincess.springboot_simplejava.business.arraycounting.presenters.ArrayCountingAlgorithmsPresenterService;
 import com.blablaprincess.springboot_simplejava.business.arraycounting.presenters.ArrayCountingAlgorithmsPresenterDtoFormatter;
 import com.blablaprincess.springboot_simplejava.business.digitsrepresentation.DigitsRepresentation;
 import lombok.RequiredArgsConstructor;
@@ -16,7 +16,7 @@ import java.util.Scanner;
 @RequiredArgsConstructor
 public class CommandLineRunnerImpl implements CommandLineRunner {
 
-    private final ArrayCountingAlgorithmsPresenter<Integer> presenter;
+    private final ArrayCountingAlgorithmsPresenterService<Integer> presenter;
     private final ArrayCountingAlgorithmsPresenterDtoFormatter formatter;
 
     @Override

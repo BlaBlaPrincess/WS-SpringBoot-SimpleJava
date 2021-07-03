@@ -3,14 +3,14 @@ package com.blablaprincess.springboot_simplejava.business.arraycounting.presente
 import com.blablaprincess.springboot_simplejava.business.arraycounting.ArrayCountingAlgorithm;
 import lombok.RequiredArgsConstructor;
 import lombok.var;
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 
 import java.util.HashMap;
 import java.util.List;
 
-@Component
+@Service
 @RequiredArgsConstructor
-public class ArrayCountingAlgorithmsPresenter<T> {
+public class ArrayCountingAlgorithmsPresenterService<T> {
 
     private final List<ArrayCountingAlgorithm<T>> algorithms;
 
