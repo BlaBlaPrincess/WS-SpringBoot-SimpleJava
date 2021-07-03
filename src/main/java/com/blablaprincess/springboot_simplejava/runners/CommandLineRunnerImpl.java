@@ -6,6 +6,7 @@ import com.blablaprincess.springboot_simplejava.business.digitsrepresentation.Di
 import lombok.RequiredArgsConstructor;
 import lombok.var;
 import org.springframework.boot.CommandLineRunner;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Component;
 
@@ -14,6 +15,7 @@ import java.util.Scanner;
 @Profile("!test")
 @Component
 @RequiredArgsConstructor
+@ConditionalOnProperty(name = "spring.main.web-application-type", havingValue = "NONE")
 public class CommandLineRunnerImpl implements CommandLineRunner {
 
     private final ArrayCountingAlgorithmsPresenterService<Integer> presenter;
