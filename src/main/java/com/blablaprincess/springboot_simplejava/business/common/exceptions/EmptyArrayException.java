@@ -1,6 +1,8 @@
 package com.blablaprincess.springboot_simplejava.business.common.exceptions;
 
-public class EmptyArrayException extends RuntimeException {
+import com.blablaprincess.springboot_simplejava.business.BusinessException;
+
+public class EmptyArrayException extends BusinessException {
 
     public EmptyArrayException() {
         super("Expected array should have been not empty");
