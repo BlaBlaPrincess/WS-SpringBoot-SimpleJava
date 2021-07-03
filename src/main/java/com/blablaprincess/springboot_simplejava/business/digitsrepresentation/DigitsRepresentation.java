@@ -1,6 +1,6 @@
 package com.blablaprincess.springboot_simplejava.business.digitsrepresentation;
 
-import com.blablaprincess.springboot_simplejava.common.IntUtils;
+import com.blablaprincess.springboot_simplejava.common.utils.IntUtils;
 import lombok.var;
 
 public class DigitsRepresentation {
