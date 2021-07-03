@@ -1,6 +1,7 @@
 package com.blablaprincess.springboot_simplejava.runners;
 
 import com.blablaprincess.springboot_simplejava.business.arraycounting.presenters.ArrayCountingAlgorithmsPresenter;
+import com.blablaprincess.springboot_simplejava.business.arraycounting.presenters.ArrayCountingAlgorithmsPresenterDtoFormatter;
 import com.blablaprincess.springboot_simplejava.business.digitsrepresentation.DigitsRepresentation;
 import lombok.RequiredArgsConstructor;
 import lombok.var;
@@ -16,6 +17,7 @@ import java.util.Scanner;
 public class CommandLineRunnerImpl implements CommandLineRunner {
 
     private final ArrayCountingAlgorithmsPresenter<Integer> presenter;
+    private final ArrayCountingAlgorithmsPresenterDtoFormatter formatter;
 
     @Override
     public void run(String... args) throws Exception {
@@ -28,7 +30,7 @@ public class CommandLineRunnerImpl implements CommandLineRunner {
                 number =  scanner.nextInt();
 
                 var array = DigitsRepresentation.getDigitsArray(number);
-                System.out.println(presenter.present(array));
+                System.out.println(formatter.format(presenter.present(array)));
             }
         } catch (Exception e) {
             System.out.printf("%nCycle interrupted.%n");

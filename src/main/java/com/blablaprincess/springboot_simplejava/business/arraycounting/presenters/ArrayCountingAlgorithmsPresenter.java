@@ -14,14 +14,11 @@ import java.util.Map;
 public class ArrayCountingAlgorithmsPresenter<T> {
 
     private final List<ArrayCountingAlgorithm<T>> algorithms;
-    private final ArrayCountingAlgorithmsPresenterDataFormatter formatter;
 
-    public String present(T[] array) {
-        ArrayCountingAlgorithmsPresenterData data
-                = ArrayCountingAlgorithmsPresenterData.builder()
-                                                      .counts(getAlgorithmsCounts(array))
-                                                      .build();
-        return formatter.format(data);
+    public ArrayCountingAlgorithmsPresenterDto present(T[] array) {
+        return ArrayCountingAlgorithmsPresenterDto.builder()
+                                                  .counts(getAlgorithmsCounts(array))
+                                                  .build();
     }
 
     private Map<String, Double> getAlgorithmsCounts(T[] array) {
