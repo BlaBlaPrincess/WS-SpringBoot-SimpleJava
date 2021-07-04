@@ -1,45 +1,34 @@
 package com.blablaprincess.springboot_simplejava.business.common.utils;
 
-import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.Arguments;
+import org.junit.jupiter.params.provider.MethodSource;
 
-import static org.junit.jupiter.api.Assertions.*;
+import java.util.stream.Stream;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.params.provider.Arguments.arguments;
 
 class IntUtilsTests {
 
-    @Test
-    void getLengthWithPositiveNum(){
-        // Arrange
-        int num = 150;
-
+    @DisplayName("getLength")
+    @ParameterizedTest(name = "with {0}")
+    @MethodSource("getLengthTestCases")
+    void getLength(String description, Integer num, Integer expected) {
         // Act
         int result = IntUtils.getLength(num);
 
         // Assert
-        assertEquals(3, result);
+        assertEquals(expected, result);
     }
 
-    @Test
-    void getLengthWithNegativeNum(){
-        // Arrange
-        int num = -5;
-
-        // Act
-        int result = IntUtils.getLength(num);
-
-        // Assert
-        assertEquals(1, result);
-    }
-
-    @Test
-    void getLengthWithZero(){
-        // Arrange
-        int num = 0;
-
-        // Act
-        int result = IntUtils.getLength(num);
-
-        // Assert
-        assertEquals(1, result);
+    static Stream<Arguments> getLengthTestCases() {
+        return Stream.of(
+                arguments("positive num",  12345, 5),
+                arguments("negative num", -12345, 5),
+                arguments("zero",          0,     1)
+                        );
     }
 
 }

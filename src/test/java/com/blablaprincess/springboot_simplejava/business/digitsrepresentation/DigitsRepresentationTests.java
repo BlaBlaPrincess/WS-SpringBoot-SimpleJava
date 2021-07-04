@@ -1,45 +1,34 @@
 package com.blablaprincess.springboot_simplejava.business.digitsrepresentation;
 
-import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.Arguments;
+import org.junit.jupiter.params.provider.MethodSource;
 
-import static org.junit.jupiter.api.Assertions.*;
+import java.util.stream.Stream;
+
+import static org.junit.jupiter.api.Assertions.assertArrayEquals;
+import static org.junit.jupiter.params.provider.Arguments.arguments;
 
 class DigitsRepresentationTests {
 
-    @Test
-    void getDigitsArrayWithPositiveNum(){
-        // Arrange
-        int num = 8721654;
-
+    @DisplayName("getDigitsArray")
+    @ParameterizedTest(name = "with {0}")
+    @MethodSource("getDigitsArrayTestCases")
+    void getLength(String description, Integer num, Integer[] expected) {
         // Act
         Integer[] result = DigitsRepresentation.getDigitsArray(num);
 
         // Assert
-        assertArrayEquals(new Integer[]{8, 7, 2, 1, 6, 5, 4}, result);
+        assertArrayEquals(expected, result);
     }
 
-    @Test
-    void getDigitsArrayWithNegativeNum(){
-        // Arrange
-        int num = -21415;
-
-        // Act
-        Integer[] result = DigitsRepresentation.getDigitsArray(num);
-
-        // Assert
-        assertArrayEquals(new Integer[]{2, 1, 4, 1, 5}, result);
-    }
-
-    @Test
-    void getDigitsArrayWithSingleDigit(){
-        // Arrange
-        int num = 1;
-
-        // Act
-        Integer[] result = DigitsRepresentation.getDigitsArray(num);
-
-        // Assert
-        assertArrayEquals(new Integer[]{1}, result);
+    static Stream<Arguments> getDigitsArrayTestCases() {
+        return Stream.of(
+                arguments("positive num",  12345, new Integer[]{1, 2, 3, 4, 5}),
+                arguments("negative num", -12345, new Integer[]{1, 2, 3, 4, 5}),
+                arguments("single digit",  2,     new Integer[]{2})
+                        );
     }
 
 }
