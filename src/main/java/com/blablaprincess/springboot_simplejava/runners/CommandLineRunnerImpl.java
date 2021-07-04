@@ -1,7 +1,7 @@
 package com.blablaprincess.springboot_simplejava.runners;
 
-import com.blablaprincess.springboot_simplejava.business.arraycounting.presenters.ArrayCountingAlgorithmsPresenterService;
 import com.blablaprincess.springboot_simplejava.business.arraycounting.presenters.ArrayCountingAlgorithmsPresenterDtoFormatter;
+import com.blablaprincess.springboot_simplejava.business.arraycounting.presenters.ArrayCountingAlgorithmsPresenterService;
 import com.blablaprincess.springboot_simplejava.business.digitsrepresentation.DigitsRepresentation;
 import lombok.RequiredArgsConstructor;
 import lombok.var;
@@ -29,7 +29,7 @@ public class CommandLineRunnerImpl implements CommandLineRunner {
             //noinspection InfiniteLoopStatement
             while (true) {
                 System.out.printf("%nNumber: ");
-                number =  scanner.nextInt();
+                number = scanner.nextInt();
 
                 var array = DigitsRepresentation.getDigitsArray(number);
                 System.out.println(formatter.format(presenter.getAlgorithmsCounts(array)));
