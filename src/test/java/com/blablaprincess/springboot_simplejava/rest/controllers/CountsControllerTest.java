@@ -25,8 +25,7 @@ import java.util.stream.Stream;
 
 import static org.junit.jupiter.params.provider.Arguments.arguments;
 import static org.mockito.ArgumentMatchers.any;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 @WebMvcTest
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
@@ -54,25 +53,37 @@ class CountsControllerTest {
                .thenReturn(responseForGetIntegerAlgorithmsCounts);
     }
 
+    @SneakyThrows
+    private ResultMatcher response(Object expected) {
+        return content().string(mapper.writeValueAsString(expected));
+    }
+
+    private ResultMatcher noResponse() {
+        return content().string("");
+    }
+
     @DisplayName("GET")
     @ParameterizedTest(name = "{0}")
     @MethodSource("getCases")
     @SneakyThrows
-    void get(String url, ResultMatcher status, Object expected) {
+    void get(String url, ResultMatcher status, ResultMatcher resultMatcher) {
         // Act + Assert
         mvc.perform(MockMvcRequestBuilders.get(url)
                                           .contentType(MediaType.APPLICATION_JSON))
            .andExpect(status)
-           .andExpect(content().string(
-                   expected == "" ? "" : mapper.writeValueAsString(expected)
-                                      ));
+           .andExpect(resultMatcher);
     }
 
-    @SneakyThrows
     private Stream<Arguments> getCases() {
         return Stream.of(
-                arguments("/counts/int",     status().isOk(), responseForGetIntegerAlgorithms),
-                arguments("/counts/int/123", status().isOk(), responseForGetIntegerAlgorithmsCounts)
+                arguments("/counts/int",          status().isOk(),           response(responseForGetIntegerAlgorithms)),
+                arguments("/counts/int/100",      status().isOk(),           response(responseForGetIntegerAlgorithmsCounts)),
+                arguments("/counts/int/-10",      status().isOk(),           response(responseForGetIntegerAlgorithmsCounts)),
+                arguments("/counts/int/any",      status().isBadRequest(), noResponse()),
+
+                arguments("/counts/integer",      status().isPermanentRedirect(), redirectedUrl("/counts/int")),
+                arguments("/counts/integer/any",  status().isPermanentRedirect(), redirectedUrl("/counts/int/any")),
+                arguments("/counts/integer/a/a",  status().isPermanentRedirect(), redirectedUrl("/counts/int/a/a"))
                         );
     }
 
