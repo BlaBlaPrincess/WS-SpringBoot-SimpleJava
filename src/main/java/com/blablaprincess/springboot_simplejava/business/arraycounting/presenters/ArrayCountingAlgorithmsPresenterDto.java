@@ -3,12 +3,14 @@ package com.blablaprincess.springboot_simplejava.business.arraycounting.presente
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.util.Map;
 
 @Data
 @Builder
+@NoArgsConstructor
 @AllArgsConstructor
 public class ArrayCountingAlgorithmsPresenterDto {
-    private final Map<String, Double> counts;
+    private Map<String, Double> counts;
 }
