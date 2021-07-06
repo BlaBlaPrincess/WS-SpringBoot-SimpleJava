@@ -10,7 +10,8 @@ import java.util.List;
 
 @Service
 @RequiredArgsConstructor
-public class ArrayCountingAlgorithmsPresenterService<T> {
+public class ArrayCountingAlgorithmsPresenterService<T>
+        implements ArrayCountingAlgorithmsPresenter<T> {
 
     private final List<ArrayCountingAlgorithm<T>> algorithms;
 

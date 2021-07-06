@@ -1,7 +1,7 @@
 package com.blablaprincess.springboot_simplejava.runners;
 
+import com.blablaprincess.springboot_simplejava.business.arraycounting.presenters.ArrayCountingAlgorithmsPresenter;
 import com.blablaprincess.springboot_simplejava.business.arraycounting.presenters.ArrayCountingAlgorithmsPresenterDtoFormatter;
-import com.blablaprincess.springboot_simplejava.business.arraycounting.presenters.ArrayCountingAlgorithmsPresenterService;
 import com.blablaprincess.springboot_simplejava.business.digitsrepresentation.DigitsRepresentation;
 import lombok.RequiredArgsConstructor;
 import lombok.var;
@@ -18,7 +18,7 @@ import java.util.Scanner;
 @ConditionalOnProperty(name = "spring.main.web-application-type", havingValue = "NONE")
 public class CommandLineRunnerImpl implements CommandLineRunner {
 
-    private final ArrayCountingAlgorithmsPresenterService<Integer> presenter;
+    private final ArrayCountingAlgorithmsPresenter<Integer> presenter;
     private final ArrayCountingAlgorithmsPresenterDtoFormatter formatter;
 
     @Override
