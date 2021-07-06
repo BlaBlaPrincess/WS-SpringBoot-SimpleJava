@@ -44,8 +44,10 @@ class IntegersAverageTests {
     static Stream<Arguments> countTestCases() {
         return Stream.of(
                 arguments("positive set", new Integer[]{1, 2, 3, 4, 10}, toEquals, 4d),
+                arguments("single digit", new Integer[]{1},              toEquals, 1d),
                 arguments("mixed set",    new Integer[]{20, -10},        toEquals, 5d),
-                arguments("empty set",    new Integer[]{},               toThrows, EmptyArrayException.class)
+                arguments("empty set",    new Integer[]{},               toThrows, EmptyArrayException.class),
+                arguments("zero",         new Integer[]{0},              toEquals, 0d)
                         );
     }
 
