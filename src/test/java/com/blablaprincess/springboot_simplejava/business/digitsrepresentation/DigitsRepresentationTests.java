@@ -27,7 +27,8 @@ class DigitsRepresentationTests {
         return Stream.of(
                 arguments("positive num",  12345, new Integer[]{1, 2, 3, 4, 5}),
                 arguments("negative num", -12345, new Integer[]{1, 2, 3, 4, 5}),
-                arguments("single digit",  2,     new Integer[]{2})
+                arguments("single digit",  2,     new Integer[]{2}),
+                arguments("zero",          0,     new Integer[]{0})
                         );
     }
 
