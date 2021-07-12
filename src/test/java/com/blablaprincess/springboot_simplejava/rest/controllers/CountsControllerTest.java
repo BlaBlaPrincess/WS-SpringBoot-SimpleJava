@@ -26,7 +26,7 @@ import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
-@WebMvcTest
+@WebMvcTest(CountsController.class)
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
 class CountsControllerTest {
 
