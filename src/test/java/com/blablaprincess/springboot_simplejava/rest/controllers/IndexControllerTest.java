@@ -12,7 +12,6 @@ import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @WebMvcTest(IndexController.class)
-@TestInstance(TestInstance.Lifecycle.PER_CLASS)
 class IndexControllerTest {
 
     @Autowired
