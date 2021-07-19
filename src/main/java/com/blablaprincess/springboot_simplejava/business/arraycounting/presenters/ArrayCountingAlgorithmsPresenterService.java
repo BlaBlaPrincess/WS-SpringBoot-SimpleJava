@@ -23,9 +23,7 @@ public class ArrayCountingAlgorithmsPresenterService<T>
                        alg.count(array));
         }
 
-        return ArrayCountingAlgorithmsPresenterDto.builder()
-                                                  .counts(counts)
-                                                  .build();
+        return new ArrayCountingAlgorithmsPresenterDto(counts);
     }
 
     public String[] getAlgorithms() {
