@@ -59,25 +59,22 @@ class CountsControllerTest {
         return content().string(mapper.writeValueAsString(expected));
     }
 
-    private ResultMatcher noResponse() {
-        return content().string("");
-    }
-
     private interface VerificationScenario {
         void verify();
     }
 
-    private final VerificationScenario getAlgorithmsCallsOnce = () -> {
-        verify(integersCountingAlgorithmsPresenterService, times(1)).getAlgorithms();
-    };
+    private final VerificationScenario getAlgorithmsCallsOnce = () ->
+            verify(integersCountingAlgorithmsPresenterService,
+                    times(1))
+                    .getAlgorithms();
 
-    private final VerificationScenario getAlgorithmsCountsCallsOnce = () -> {
-        verify(integersCountingAlgorithmsPresenterService, times(1)).getAlgorithmsCounts(any());
-    };
+    private final VerificationScenario getAlgorithmsCountsCallsOnce = () ->
+            verify(integersCountingAlgorithmsPresenterService,
+                    times(1))
+                    .getAlgorithmsCounts(any());
 
-    private final VerificationScenario verifyNoInteractions = () -> {
-        verifyNoInteractions(integersCountingAlgorithmsPresenterService);
-    };
+    private final VerificationScenario verifyNoInteractions = () ->
+            verifyNoInteractions(integersCountingAlgorithmsPresenterService);
 
     @DisplayName("GET")
     @ParameterizedTest(name = "{0}")
@@ -94,14 +91,13 @@ class CountsControllerTest {
 
     private Stream<Arguments> getCases() {
         return Stream.of(
-                arguments("/counts/int",          status().isOk(),           response(responseForGetIntegerAlgorithms),       getAlgorithmsCallsOnce),
-                arguments("/counts/int/100",      status().isOk(),           response(responseForGetIntegerAlgorithmsCounts), getAlgorithmsCountsCallsOnce),
-                arguments("/counts/int/-10",      status().isOk(),           response(responseForGetIntegerAlgorithmsCounts), getAlgorithmsCountsCallsOnce),
-                arguments("/counts/int/any",      status().isBadRequest(), noResponse(),                                      verifyNoInteractions),
+                arguments("/counts/int",         status().isOk(), response(responseForGetIntegerAlgorithms),       getAlgorithmsCallsOnce),
+                arguments("/counts/int/100",     status().isOk(), response(responseForGetIntegerAlgorithmsCounts), getAlgorithmsCountsCallsOnce),
+                arguments("/counts/int/-10",     status().isOk(), response(responseForGetIntegerAlgorithmsCounts), getAlgorithmsCountsCallsOnce),
 
-                arguments("/counts/integer",      status().isPermanentRedirect(), redirectedUrl("/counts/int"),     verifyNoInteractions),
-                arguments("/counts/integer/any",  status().isPermanentRedirect(), redirectedUrl("/counts/int/any"), verifyNoInteractions),
-                arguments("/counts/integer/a/a",  status().isPermanentRedirect(), redirectedUrl("/counts/int/a/a"), verifyNoInteractions)
+                arguments("/counts/integer",     status().isPermanentRedirect(), redirectedUrl("/counts/int"),     verifyNoInteractions),
+                arguments("/counts/integer/any", status().isPermanentRedirect(), redirectedUrl("/counts/int/any"), verifyNoInteractions),
+                arguments("/counts/integer/a/a", status().isPermanentRedirect(), redirectedUrl("/counts/int/a/a"), verifyNoInteractions)
                         );
     }
 

@@ -2,9 +2,9 @@ package com.blablaprincess.springboot_simplejava.rest;
 
 import com.blablaprincess.springboot_simplejava.business.BusinessException;
 import com.blablaprincess.springboot_simplejava.rest.common.ProvidingSettersResponseWrapper;
+import com.blablaprincess.springboot_simplejava.rest.dto.ErrorDto;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
-import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.DefaultHandlerExceptionResolver;
 
 import javax.servlet.http.HttpServletRequest;
@@ -23,7 +23,7 @@ public class ExceptionsHandler extends DefaultHandlerExceptionResolver {
     }};
 
     @ExceptionHandler(Exception.class)
-    public ModelAndView handleServletException
+    public ErrorDto handleServletException
             (Exception exception, HttpServletRequest request, HttpServletResponse response) throws IOException {
 
         ProvidingSettersResponseWrapper settersWrapper = new ProvidingSettersResponseWrapper(response);
@@ -32,13 +32,12 @@ public class ExceptionsHandler extends DefaultHandlerExceptionResolver {
             settersWrapper.sendError(code);
         }
 
-        String prefix = "Exception-";
-        response.addHeader(    prefix + "Path",      request.getRequestURI());
-        response.addHeader(    prefix + "Class",     exception.getClass().getName());
-        response.addHeader(    prefix + "Message",   exception.getMessage());
-        response.addDateHeader(prefix + "Timestamp", new Date().getTime());
-
-        return new ModelAndView();
+        return ErrorDto.builder()
+                .path     (request.getRequestURI())
+                .className(exception.getClass().getName())
+                .message  (exception.getMessage())
+                .timestamp(new Date().toString())
+                .build();
     }
 
     @Override
