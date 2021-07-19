@@ -14,7 +14,7 @@ public class IntegersMax implements ArrayCountingAlgorithm<Integer> {
 
     @Override
     public double count(Integer[] array) {
-        ArrayUtils.ValidateArrayNotEmpty(array);
+        ArrayUtils.validateArrayNotEmpty(array);
         return Arrays.stream(array)
                      .max(Integer::compareTo)
                      .orElseThrow(UnexpectedArrayCountingException::new);

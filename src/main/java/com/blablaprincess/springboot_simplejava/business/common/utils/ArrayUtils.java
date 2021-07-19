@@ -4,7 +4,7 @@ import com.blablaprincess.springboot_simplejava.business.common.exceptions.Empty
 
 public class ArrayUtils {
 
-    public static <T> void ValidateArrayNotEmpty(T[] array) {
+    public static <T> void validateArrayNotEmpty(T[] array) {
         if (array.length == 0) {
             throw new EmptyArrayException();
         }

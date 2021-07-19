@@ -20,13 +20,13 @@ class ArrayUtilsTest {
 
     private static final TestScenario toDoesNotThrows = (array, expected) -> {
         // Act + Assert
-        assertDoesNotThrow(() -> ArrayUtils.ValidateArrayNotEmpty(array));
+        assertDoesNotThrow(() -> ArrayUtils.validateArrayNotEmpty(array));
     };
 
     @SuppressWarnings("unchecked")
     private static final TestScenario toThrows = (array, exception) -> {
         // Act + Assert
-        assertThrows((Class<Exception>) exception, () -> ArrayUtils.ValidateArrayNotEmpty(array));
+        assertThrows((Class<Exception>) exception, () -> ArrayUtils.validateArrayNotEmpty(array));
     };
 
     @DisplayName("validateArrayNotEmpty")

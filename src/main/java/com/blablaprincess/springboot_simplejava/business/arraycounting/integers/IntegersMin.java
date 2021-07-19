@@ -14,7 +14,7 @@ public class IntegersMin implements ArrayCountingAlgorithm<Integer> {
 
     @Override
     public double count(Integer[] array) {
-        ArrayUtils.ValidateArrayNotEmpty(array);
+        ArrayUtils.validateArrayNotEmpty(array);
         return Arrays.stream(array)
                      .min(Integer::compareTo)
                      .orElseThrow(UnexpectedArrayCountingException::new);

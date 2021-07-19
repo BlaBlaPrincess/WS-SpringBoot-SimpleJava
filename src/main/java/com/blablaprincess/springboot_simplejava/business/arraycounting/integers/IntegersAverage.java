@@ -13,7 +13,7 @@ public class IntegersAverage implements ArrayCountingAlgorithm<Integer> {
 
     @Override
     public double count(Integer[] array) {
-        ArrayUtils.ValidateArrayNotEmpty(array);
+        ArrayUtils.validateArrayNotEmpty(array);
         return (double) Arrays.stream(array)
                               .mapToInt(Integer::intValue)
                               .sum() / array.length;
