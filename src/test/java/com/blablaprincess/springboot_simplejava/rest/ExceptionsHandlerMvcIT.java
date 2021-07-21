@@ -41,8 +41,8 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 @Execution(ExecutionMode.SAME_THREAD)
 @ExtendWith(SpringExtension.class)
-@WebMvcTest(controllers = ExceptionsHandlerTest.ExceptionTestConfig.ExceptionTestController.class)
-class ExceptionsHandlerTest {
+@WebMvcTest(controllers = ExceptionsHandlerMvcIT.ExceptionTestConfig.ExceptionTestController.class)
+class ExceptionsHandlerMvcIT {
 
     private static final String TARGET_PACKAGE = "com.blablaprincess.springboot_simplejava";
     private static final Random random = new Random();

@@ -12,7 +12,7 @@ import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.params.provider.Arguments.arguments;
 
-class ArrayUtilsTest {
+class ArrayUtilsTests {
 
     private interface TestScenario {
         void test(Object[] array, Object expected);

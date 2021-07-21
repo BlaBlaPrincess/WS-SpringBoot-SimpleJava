@@ -11,7 +11,7 @@ import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @WebMvcTest(SwaggerConfig.class)
-class SwaggerConfigTest {
+class SwaggerConfigMvcIT {
 
     @Autowired
     private MockMvc mvc;

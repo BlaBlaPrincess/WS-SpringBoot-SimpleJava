@@ -28,7 +28,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 @WebMvcTest(CountsController.class)
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
-class CountsControllerTest {
+class CountsControllerMvcIT {
 
     @Autowired
     private MockMvc mvc;
