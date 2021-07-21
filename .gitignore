@@ -112,3 +112,4 @@ hs_err_pid*
 ### Custom specified files
 
 .idea/inspectionProfiles/
+/.idea/codeStyles/
