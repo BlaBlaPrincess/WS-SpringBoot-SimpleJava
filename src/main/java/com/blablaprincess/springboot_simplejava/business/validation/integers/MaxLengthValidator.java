@@ -35,7 +35,8 @@ public class MaxLengthValidator implements Validator<Integer> {
     @Override
     public void validate(Integer value) throws ValidationException {
         if (IntUtils.getLength(value) > MAX_LENGTH) {
-            throw new ValidationException();
+            throw new ValidationException(String.format("The number cannot be larger than %d signs", MAX_LENGTH));
         }
     }
+
 }

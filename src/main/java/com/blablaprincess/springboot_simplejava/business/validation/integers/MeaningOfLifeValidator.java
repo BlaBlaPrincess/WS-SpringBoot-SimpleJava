@@ -15,7 +15,7 @@ public class MeaningOfLifeValidator implements Validator<Integer> {
     public void validate(Integer value) throws ValidationException {
         Integer[] array = DigitsRepresentation.getDigitsArray(value);
         if (new IntegersSum().count(array) == 42) {
-            throw new ValidationException();
+            throw new ValidationException("The sum of the digits of the number cannot be equal to 42");
         }
     }
 
