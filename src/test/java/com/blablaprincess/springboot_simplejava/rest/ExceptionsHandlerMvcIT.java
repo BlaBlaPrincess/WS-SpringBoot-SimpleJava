@@ -155,14 +155,17 @@ class ExceptionsHandlerMvcIT {
     @MethodSource("getPackageExceptionCases")
     void checkIfAllExceptionsProcessed(final String description,
                                        final Class<? extends Throwable> packageExceptionType) throws RuntimeException {
+        // Arrange
         List<TestParameter> testData = getTestExceptions().collect(Collectors.toList());
 
+        // Act
         for (TestParameter testParam : testData) {
             if (packageExceptionType.isInstance(testParam.exception)) {
                 return;
             }
         }
 
+        // Assert
         throw new AssertionFailedError(String.format("Class %s does not have a handling test in ExceptionHandler",
                                                      packageExceptionType.getName()));
     }
@@ -171,9 +174,12 @@ class ExceptionsHandlerMvcIT {
     @ParameterizedTest(name = "{0}")
     @MethodSource("getTestExceptionCases")
     void assertException(final String description, final TestParameter param) throws Exception {
+        // Arrange
         doThrow(param.exception).when(thrower).doWork();
 
+        // Act
         String jsonResult = mvc.perform(MockMvcRequestBuilders.get(ExceptionTestConfig.ExceptionTestController.DO_STAFF_URI))
+                               // Assert
                                .andExpect(status().is(param.code))
                                .andReturn()
                                .getResponse()
