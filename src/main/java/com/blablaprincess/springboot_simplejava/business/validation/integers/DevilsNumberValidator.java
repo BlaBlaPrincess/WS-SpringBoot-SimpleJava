@@ -14,10 +14,8 @@ public class DevilsNumberValidator implements Validator<Integer> {
 
     @Override
     public void validate(Integer value) throws ValidationException {
-        Pattern p = Pattern.compile("(\\D|\\b)666(\\D|\\b)");
-        Matcher m = p.matcher(value.toString());
-        if (m.matches()) {
-            throw new ValidationException();
+        if (value == 666) {
+            throw new ValidationException("The number cannot be 666");
         }
     }
 
