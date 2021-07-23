@@ -14,7 +14,7 @@ public class IndexController {
     @ResponseStatus(HttpStatus.PERMANENT_REDIRECT)
     @Operation(summary = "redirects index to swagger ui")
     public RedirectView redirectIndexToSwaggerUi() {
-        return new RedirectView("/swagger-ui.html");
+        return new RedirectView("/swagger-ui/");
     }
 
 }
