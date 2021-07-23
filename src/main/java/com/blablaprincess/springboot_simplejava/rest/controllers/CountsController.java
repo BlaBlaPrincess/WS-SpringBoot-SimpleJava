@@ -38,7 +38,7 @@ public class CountsController {
     @GetMapping("/integer/**")
     @ResponseStatus(HttpStatus.PERMANENT_REDIRECT)
     @Operation(summary = "redirects counts/integer/** to counts/int/**")
-    public RedirectView redirectCountsForIntToInteger(
+    public RedirectView redirectCountsForIntegerToInt(
             @Parameter(hidden = true) HttpServletRequest request) {
         var relativeUri = request.getRequestURI().replace("/counts/integer", "");
         return new RedirectView("/counts/int" + relativeUri);
