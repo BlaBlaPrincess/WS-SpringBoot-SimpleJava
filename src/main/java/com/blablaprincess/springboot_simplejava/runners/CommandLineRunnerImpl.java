@@ -1,10 +1,12 @@
 package com.blablaprincess.springboot_simplejava.runners;
 
 import com.blablaprincess.springboot_simplejava.business.arraycounting.presenters.ArrayCountingAlgorithmsPresenter;
+import com.blablaprincess.springboot_simplejava.business.arraycounting.presenters.ArrayCountingAlgorithmsPresenterDtoFormatter;
 import com.blablaprincess.springboot_simplejava.business.digitsrepresentation.DigitsRepresentation;
 import lombok.RequiredArgsConstructor;
 import lombok.var;
 import org.springframework.boot.CommandLineRunner;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Component;
 
@@ -13,9 +15,11 @@ import java.util.Scanner;
 @Profile("!test")
 @Component
 @RequiredArgsConstructor
+@ConditionalOnProperty(name = "spring.main.web-application-type", havingValue = "NONE")
 public class CommandLineRunnerImpl implements CommandLineRunner {
 
     private final ArrayCountingAlgorithmsPresenter<Integer> presenter;
+    private final ArrayCountingAlgorithmsPresenterDtoFormatter formatter;
 
     @Override
     public void run(String... args) throws Exception {
@@ -25,10 +29,10 @@ public class CommandLineRunnerImpl implements CommandLineRunner {
             //noinspection InfiniteLoopStatement
             while (true) {
                 System.out.printf("%nNumber: ");
-                number =  scanner.nextInt();
+                number = scanner.nextInt();
 
                 var array = DigitsRepresentation.getDigitsArray(number);
-                System.out.println(presenter.present(array));
+                System.out.println(formatter.format(presenter.getAlgorithmsCounts(array)));
             }
         } catch (Exception e) {
             System.out.printf("%nCycle interrupted.%n");

@@ -7,7 +7,7 @@ import org.springframework.stereotype.Component;
 import java.util.Arrays;
 
 @Component
-@ConditionalOnProperty(name = "count_alg.int.sum.enabled", havingValue = "true")
+@ConditionalOnProperty(name = "count-alg.int.sum.enabled", havingValue = "true")
 public class IntegersSum implements ArrayCountingAlgorithm<Integer> {
 
     @Override
