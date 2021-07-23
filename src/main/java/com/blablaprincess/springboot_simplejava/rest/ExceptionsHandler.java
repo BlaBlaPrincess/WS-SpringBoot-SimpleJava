@@ -40,9 +40,4 @@ public class ExceptionsHandler extends DefaultHandlerExceptionResolver {
                 .build();
     }
 
-    @Override
-    protected void sendServerError(Exception ex, HttpServletRequest request, HttpServletResponse response) throws IOException {
-        response.sendError(500);
-    }
-
 }
