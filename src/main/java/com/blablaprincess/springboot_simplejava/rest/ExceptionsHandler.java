@@ -1,6 +1,7 @@
 package com.blablaprincess.springboot_simplejava.rest;
 
 import com.blablaprincess.springboot_simplejava.business.BusinessException;
+import com.blablaprincess.springboot_simplejava.business.validation.ValidationException;
 import com.blablaprincess.springboot_simplejava.rest.common.ProvidingSettersResponseWrapper;
 import com.blablaprincess.springboot_simplejava.rest.dto.ErrorDto;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -19,6 +20,7 @@ public class ExceptionsHandler extends DefaultHandlerExceptionResolver {
     private final HashMap<Class<? extends Throwable>, Integer> exceptionResponseMap
             = new HashMap<Class<? extends Throwable>, Integer>() {{
         put(BusinessException.class, 500);
+        put(ValidationException.class, 400);
         put(RestException.class, 500);
     }};
 

@@ -3,6 +3,7 @@ package com.blablaprincess.springboot_simplejava.rest;
 import com.blablaprincess.springboot_simplejava.business.BusinessException;
 import com.blablaprincess.springboot_simplejava.business.arraycounting.UnexpectedArrayCountingException;
 import com.blablaprincess.springboot_simplejava.business.common.exceptions.EmptyArrayException;
+import com.blablaprincess.springboot_simplejava.business.validation.ValidationException;
 import com.blablaprincess.springboot_simplejava.rest.dto.ErrorDto;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.SneakyThrows;
@@ -140,6 +141,7 @@ class ExceptionsHandlerMvcIT {
                 new TestParameterBuilder().exceptionType(RestException.class)      .setRandomMessage().code(500),
                 new TestParameterBuilder().exceptionType(BusinessException.class)  .setRandomMessage().code(500),
                 new TestParameterBuilder().exceptionType(EmptyArrayException.class).setRandomMessage().code(500),
+                new TestParameterBuilder().exceptionType(ValidationException.class).setRandomMessage().code(400),
                 new TestParameterBuilder().exceptionType(UnexpectedArrayCountingException.class).setRandomMessage().code(500))
                      .map(TestParameterBuilder::build);
     }
