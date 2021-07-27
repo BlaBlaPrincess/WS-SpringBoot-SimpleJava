@@ -19,8 +19,8 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @Execution(ExecutionMode.SAME_THREAD)
 @SpringBootTest
 @AutoConfigureMockMvc
-@ContextConfiguration(initializers = SwaggerConfigMvcIT.MockEnvironmentApplicationContextInitializer.class)
-class SwaggerConfigMvcIT {
+@ContextConfiguration(initializers = SwaggerConfigSpringIT.MockEnvironmentApplicationContextInitializer.class)
+class SwaggerConfigSpringIT {
 
     public static class MockEnvironmentApplicationContextInitializer implements ApplicationContextInitializer<ConfigurableApplicationContext> {
 
