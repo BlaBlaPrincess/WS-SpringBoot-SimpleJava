@@ -9,6 +9,8 @@ import org.junit.jupiter.api.parallel.Execution;
 import org.junit.jupiter.api.parallel.ExecutionMode;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.test.context.DynamicPropertyRegistry;
 import org.springframework.test.context.DynamicPropertySource;
 import org.testcontainers.containers.PostgreSQLContainer;
@@ -85,6 +87,22 @@ class ControllerCallDescriptionsRepositorySpringPgSqlContainerIT {
 
         // Assert
         assertEquals(0, result.size());
+    }
+
+    @Test
+    void findPageByTimestampIsBetween() throws ParseException {
+        // Arrange
+        Date from     = format.parse("01/01/2021 00:00:00");
+        Date to       = format.parse("01/01/2021 00:02:00");
+        Date expected = format.parse("01/01/2021 00:00:00");
+
+        // Act
+        Page<ControllerCallDescriptionEntity> page = repository.findByTimestampIsBetween(from, to, Pageable.ofSize(1));
+        List<ControllerCallDescriptionEntity> result = page.toList();
+
+        // Assert
+        assertEquals(1, result.size());
+        assertEquals(expected, result.get(0).getTimestamp());
     }
 
 }
