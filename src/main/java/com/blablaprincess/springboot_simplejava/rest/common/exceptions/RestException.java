@@ -1,4 +1,4 @@
-package com.blablaprincess.springboot_simplejava.rest;
+package com.blablaprincess.springboot_simplejava.rest.common.exceptions;
 
 public class RestException extends RuntimeException {
 
