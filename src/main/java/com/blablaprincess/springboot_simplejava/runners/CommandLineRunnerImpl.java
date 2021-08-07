@@ -2,7 +2,7 @@ package com.blablaprincess.springboot_simplejava.runners;
 
 import com.blablaprincess.springboot_simplejava.business.arraycounting.presenters.ArrayCountingAlgorithmsPresenter;
 import com.blablaprincess.springboot_simplejava.business.arraycounting.presenters.ArrayCountingAlgorithmsPresenterDtoFormatter;
-import com.blablaprincess.springboot_simplejava.business.digitsrepresentation.DigitsRepresentation;
+import com.blablaprincess.springboot_simplejava.business.common.digitsrepresentation.DigitsRepresentation;
 import lombok.RequiredArgsConstructor;
 import lombok.var;
 import org.springframework.boot.CommandLineRunner;

@@ -1,4 +1,4 @@
-package com.blablaprincess.springboot_simplejava.business.digitsrepresentation;
+package com.blablaprincess.springboot_simplejava.business.common.digitsrepresentation;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;

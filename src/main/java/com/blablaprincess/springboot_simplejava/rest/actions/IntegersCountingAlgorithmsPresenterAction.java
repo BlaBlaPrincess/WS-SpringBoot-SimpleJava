@@ -2,7 +2,7 @@ package com.blablaprincess.springboot_simplejava.rest.actions;
 
 import com.blablaprincess.springboot_simplejava.business.arraycounting.presenters.ArrayCountingAlgorithmsPresenter;
 import com.blablaprincess.springboot_simplejava.business.arraycounting.presenters.ArrayCountingAlgorithmsPresenterDto;
-import com.blablaprincess.springboot_simplejava.business.digitsrepresentation.DigitsRepresentation;
+import com.blablaprincess.springboot_simplejava.business.common.digitsrepresentation.DigitsRepresentation;
 import com.blablaprincess.springboot_simplejava.business.validation.ValidatorsCollection;
 import lombok.RequiredArgsConstructor;
 import lombok.var;

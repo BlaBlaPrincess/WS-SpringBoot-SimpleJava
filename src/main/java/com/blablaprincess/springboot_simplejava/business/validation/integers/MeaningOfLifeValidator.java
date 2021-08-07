@@ -1,7 +1,7 @@
 package com.blablaprincess.springboot_simplejava.business.validation.integers;
 
 import com.blablaprincess.springboot_simplejava.business.arraycounting.integers.IntegersSum;
-import com.blablaprincess.springboot_simplejava.business.digitsrepresentation.DigitsRepresentation;
+import com.blablaprincess.springboot_simplejava.business.common.digitsrepresentation.DigitsRepresentation;
 import com.blablaprincess.springboot_simplejava.business.validation.ValidationException;
 import com.blablaprincess.springboot_simplejava.business.validation.Validator;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;

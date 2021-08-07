@@ -1,4 +1,4 @@
-package com.blablaprincess.springboot_simplejava.business.digitsrepresentation;
+package com.blablaprincess.springboot_simplejava.business.common.digitsrepresentation;
 
 import com.blablaprincess.springboot_simplejava.business.common.utils.IntUtils;
 import lombok.var;
