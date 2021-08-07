@@ -1,6 +1,6 @@
 package com.blablaprincess.springboot_simplejava.rest.exceptionshandler;
 
-import com.blablaprincess.springboot_simplejava.business.BusinessException;
+import com.blablaprincess.springboot_simplejava.business.common.exceptions.BusinessException;
 import com.blablaprincess.springboot_simplejava.business.arraycounting.UnexpectedArrayCountingException;
 import com.blablaprincess.springboot_simplejava.business.common.exceptions.EmptyArrayException;
 import com.blablaprincess.springboot_simplejava.business.validation.ValidationException;

@@ -1,6 +1,6 @@
 package com.blablaprincess.springboot_simplejava.rest.exceptionshandler;
 
-import com.blablaprincess.springboot_simplejava.business.BusinessException;
+import com.blablaprincess.springboot_simplejava.business.common.exceptions.BusinessException;
 import com.blablaprincess.springboot_simplejava.business.validation.ValidationException;
 import com.blablaprincess.springboot_simplejava.rest.common.ProvidingSettersResponseWrapper;
 import com.blablaprincess.springboot_simplejava.rest.dto.ErrorDto;

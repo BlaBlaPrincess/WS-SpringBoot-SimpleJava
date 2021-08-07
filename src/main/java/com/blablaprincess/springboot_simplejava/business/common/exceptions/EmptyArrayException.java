@@ -1,7 +1,5 @@
 package com.blablaprincess.springboot_simplejava.business.common.exceptions;
 
-import com.blablaprincess.springboot_simplejava.business.BusinessException;
-
 public class EmptyArrayException extends BusinessException {
 
     public EmptyArrayException() {

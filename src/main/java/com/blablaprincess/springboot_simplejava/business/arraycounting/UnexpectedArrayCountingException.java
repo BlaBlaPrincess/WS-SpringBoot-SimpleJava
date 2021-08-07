@@ -1,6 +1,6 @@
 package com.blablaprincess.springboot_simplejava.business.arraycounting;
 
-import com.blablaprincess.springboot_simplejava.business.BusinessException;
+import com.blablaprincess.springboot_simplejava.business.common.exceptions.BusinessException;
 import lombok.NoArgsConstructor;
 
 @NoArgsConstructor
