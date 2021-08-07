@@ -7,7 +7,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import static org.mockito.Mockito.*;
 
-class ControllerCallsHistoryAfterDispatchingProcessorTests {
+class ControllerCallsHistoryAfterDispatchingProcessorUT {
 
     private final ControllerCallsHistory service = mock(ControllerCallsHistory.class);
 

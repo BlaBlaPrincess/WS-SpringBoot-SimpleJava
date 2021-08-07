@@ -8,13 +8,12 @@ import org.junit.jupiter.params.provider.MethodSource;
 
 import java.util.stream.Stream;
 
-import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
-import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.*;
 import static org.junit.jupiter.params.provider.Arguments.arguments;
 
-class DevilsNumberValidatorTests {
+class MeaningOfLifeValidatorUT {
 
-    private static final DevilsNumberValidator validator = new DevilsNumberValidator();
+    private static final MeaningOfLifeValidator validator = new MeaningOfLifeValidator();
 
     private interface TestScenario {
         void test(Integer value);
@@ -39,11 +38,9 @@ class DevilsNumberValidatorTests {
 
     static Stream<Arguments> getValidateCases() {
         return Stream.of(
-                arguments(666,  toThrows),
-                arguments(766,  toDoesNotThrows),
-                arguments(6666, toDoesNotThrows),
-                arguments(7666, toDoesNotThrows),
-                arguments(6766, toDoesNotThrows)
+                arguments(99996, toThrows),
+                arguments(99997, toDoesNotThrows),
+                arguments(42,    toDoesNotThrows)
         );
     }
 

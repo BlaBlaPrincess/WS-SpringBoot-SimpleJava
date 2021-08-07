@@ -8,7 +8,7 @@ import java.io.InputStream;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class InputStreamUtilsTests {
+class InputStreamUtilsUT {
 
     @Test
     @DisplayName("static toString")

@@ -12,7 +12,7 @@ import static com.blablaprincess.springboot_simplejava.business.controllercalls.
 import static org.junit.jupiter.api.Assertions.*;
 import static org.junit.jupiter.params.provider.Arguments.arguments;
 
-class ControllerCallDescriptionEntityTests {
+class ControllerCallDescriptionEntityUT {
 
 
     @DisplayName("setResponse() expect not cropped response")

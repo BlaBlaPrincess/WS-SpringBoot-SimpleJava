@@ -12,7 +12,7 @@ import java.util.stream.Stream;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.junit.jupiter.params.provider.Arguments.arguments;
 
-class MaxLengthValidatorTests {
+class MaxLengthValidatorUT {
 
     private interface TestScenario {
         void test(Integer value, String property);

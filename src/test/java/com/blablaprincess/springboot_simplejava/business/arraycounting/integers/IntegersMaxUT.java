@@ -12,7 +12,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.params.provider.Arguments.arguments;
 
-class IntegersMaxTests {
+class IntegersMaxUT {
 
     private static final IntegersMax integersMax = new IntegersMax();
 

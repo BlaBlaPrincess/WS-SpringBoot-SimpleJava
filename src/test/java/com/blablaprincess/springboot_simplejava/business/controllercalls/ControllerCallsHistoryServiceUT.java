@@ -9,7 +9,7 @@ import java.util.Date;
 
 import static org.mockito.Mockito.*;
 
-class ControllerCallsHistoryServiceTests {
+class ControllerCallsHistoryServiceUT {
 
     private final ControllerCallDescriptionsRepository repository = mock(ControllerCallDescriptionsRepository.class);
     private final ControllerCallsHistoryService service = new ControllerCallsHistoryService(repository);

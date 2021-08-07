@@ -8,7 +8,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import static org.mockito.Mockito.*;
 
-class TelegramNotifierAfterDispatchingProcessorTests {
+class TelegramNotifierAfterDispatchingProcessorUT {
 
     private final TelegramBotNotifierService service = mock(TelegramBotNotifierService.class);
 

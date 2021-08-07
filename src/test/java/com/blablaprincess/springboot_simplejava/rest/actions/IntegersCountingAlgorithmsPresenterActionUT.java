@@ -15,7 +15,7 @@ import static org.junit.jupiter.api.Assertions.*;
 import static org.junit.jupiter.params.provider.Arguments.arguments;
 import static org.mockito.Mockito.*;
 
-class IntegersCountingAlgorithmsPresenterActionTests {
+class IntegersCountingAlgorithmsPresenterActionUT {
 
     @SuppressWarnings("unchecked")
     private final ArrayCountingAlgorithmsPresenter<Integer> presenter =

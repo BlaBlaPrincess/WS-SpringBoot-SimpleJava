@@ -13,7 +13,7 @@ import java.util.stream.Stream;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.junit.jupiter.params.provider.Arguments.arguments;
 
-class DateTimeImplTests {
+class DateTimeImplUT {
 
     private final DateTimeImpl dateTime = new DateTimeImpl();
     private final SimpleDateFormat format = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss");
