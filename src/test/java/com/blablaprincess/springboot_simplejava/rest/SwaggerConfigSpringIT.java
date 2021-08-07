@@ -19,17 +19,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @Execution(ExecutionMode.SAME_THREAD)
 @SpringBootTest
 @AutoConfigureMockMvc
-@ContextConfiguration(initializers = SwaggerConfigSpringIT.MockEnvironmentApplicationContextInitializer.class)
-class SwaggerConfigSpringIT {
-
-    public static class MockEnvironmentApplicationContextInitializer implements ApplicationContextInitializer<ConfigurableApplicationContext> {
-
-        @Override
-        public void initialize(ConfigurableApplicationContext context) {
-            context.setEnvironment(new MockEnvironment());
-        }
-
-    }
+class SwaggerConfigMvcIT {
 
     @Autowired
     private MockMvc mvc;
@@ -44,10 +34,10 @@ class SwaggerConfigSpringIT {
     }
 
     @Test
-    @DisplayName("GET /v2/api-docs")
-    void getJson() throws Exception {
+    @DisplayName("GET /swagger-resources")
+    void getSwaggerResources() throws Exception {
         // Act
-        mvc.perform(MockMvcRequestBuilders.get("/v2/api-docs"))
+        mvc.perform(MockMvcRequestBuilders.get("/swagger-resources"))
                 // Assert
                 .andExpect(status().isOk());
     }
