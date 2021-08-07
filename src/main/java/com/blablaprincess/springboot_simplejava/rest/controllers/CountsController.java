@@ -1,7 +1,10 @@
 package com.blablaprincess.springboot_simplejava.rest.controllers;
 
+import com.blablaprincess.springboot_simplejava.business.controllercalls.ControllerCallsHistoryAfterDispatchingProcessor;
+import com.blablaprincess.springboot_simplejava.rest.afterdispatchingprocessor.ProcessAfterDispatchingWith;
 import com.blablaprincess.springboot_simplejava.business.arraycounting.presenters.ArrayCountingAlgorithmsPresenterDto;
 import com.blablaprincess.springboot_simplejava.rest.actions.IntegersCountingAlgorithmsPresenterAction;
+import com.blablaprincess.springboot_simplejava.business.notifiers.telegram.TelegramBotNotifierAfterDispatchingProcessor;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import lombok.RequiredArgsConstructor;
@@ -15,19 +18,21 @@ import javax.servlet.http.HttpServletRequest;
 @RestController
 @RequestMapping("/counts")
 @RequiredArgsConstructor
+@ProcessAfterDispatchingWith({
+        ControllerCallsHistoryAfterDispatchingProcessor.class,
+        TelegramBotNotifierAfterDispatchingProcessor.class
+})
 public class CountsController {
 
     private final IntegersCountingAlgorithmsPresenterAction integersCountingAlgorithmsPresenterAction;
 
     @GetMapping("/int")
-    @ResponseStatus(HttpStatus.OK)
     @Operation(summary = "get list of all counting algorithms for array of digits")
     public String[] getCountsForInteger() {
         return integersCountingAlgorithmsPresenterAction.getAlgorithms();
     }
 
     @GetMapping("/int/{integer}")
-    @ResponseStatus(HttpStatus.OK)
     @Operation(summary = "get algorithm calculations for an array of digits")
     public ArrayCountingAlgorithmsPresenterDto getCountsForInteger(@PathVariable int integer) {
         return integersCountingAlgorithmsPresenterAction.getAlgorithmsCounts(integer);
