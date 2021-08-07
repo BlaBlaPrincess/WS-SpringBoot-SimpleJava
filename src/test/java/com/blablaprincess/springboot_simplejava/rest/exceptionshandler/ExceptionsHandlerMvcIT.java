@@ -4,7 +4,6 @@ import com.blablaprincess.springboot_simplejava.business.common.exceptions.Busin
 import com.blablaprincess.springboot_simplejava.business.arraycounting.UnexpectedArrayCountingException;
 import com.blablaprincess.springboot_simplejava.business.common.exceptions.EmptyArrayException;
 import com.blablaprincess.springboot_simplejava.business.validation.ValidationException;
-import com.blablaprincess.springboot_simplejava.rest.dto.ErrorDto;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.SneakyThrows;
 import org.junit.jupiter.api.DisplayName;
