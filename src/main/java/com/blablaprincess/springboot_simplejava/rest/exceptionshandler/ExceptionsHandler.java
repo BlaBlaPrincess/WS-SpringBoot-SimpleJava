@@ -1,4 +1,4 @@
-package com.blablaprincess.springboot_simplejava.rest;
+package com.blablaprincess.springboot_simplejava.rest.exceptionshandler;
 
 import com.blablaprincess.springboot_simplejava.business.BusinessException;
 import com.blablaprincess.springboot_simplejava.business.validation.ValidationException;
