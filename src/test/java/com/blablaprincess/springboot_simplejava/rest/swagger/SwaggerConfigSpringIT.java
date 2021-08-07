@@ -1,4 +1,4 @@
-package com.blablaprincess.springboot_simplejava.rest;
+package com.blablaprincess.springboot_simplejava.rest.swagger;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
