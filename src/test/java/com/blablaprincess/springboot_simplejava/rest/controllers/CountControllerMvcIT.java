@@ -1,12 +1,11 @@
 package com.blablaprincess.springboot_simplejava.rest.controllers;
 
-import com.blablaprincess.springboot_simplejava.business.arraycounting.presenters.ArrayCountingAlgorithmsPresenter;
+import com.blablaprincess.springboot_simplejava.rest.actions.IntegersCountingAlgorithmsPresenterAction;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.parallel.Execution;
 import org.junit.jupiter.api.parallel.ExecutionMode;
 import org.junit.jupiter.params.ParameterizedTest;
-import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
 import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,7 +16,6 @@ import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 
 import java.util.stream.Stream;
 
-import static org.junit.jupiter.params.provider.Arguments.arguments;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.redirectedUrl;
@@ -31,44 +29,41 @@ public class CountControllerMvcIT {
     private MockMvc mvc;
 
     @MockBean
-    private ArrayCountingAlgorithmsPresenter<Integer> integersCountingAlgorithmsPresenterService;
+    private IntegersCountingAlgorithmsPresenterAction integersCountingAlgorithmsPresenterAction;
 
     @DisplayName("GET algorithms")
     @Test
     void getAlgorithms() throws Exception {
         // Arrange
         String url = "/counts/int";
-        Mockito.when(integersCountingAlgorithmsPresenterService.getAlgorithms()).thenReturn(null);
+        Mockito.when(integersCountingAlgorithmsPresenterAction.getAlgorithms()).thenReturn(null);
 
         // Act
         mvc.perform(MockMvcRequestBuilders.get(url))
                 // Assert
                 .andExpect(status().isOk());
 
-        verify(integersCountingAlgorithmsPresenterService, times(1)).getAlgorithms();
+        verify(integersCountingAlgorithmsPresenterAction, times(1)).getAlgorithms();
     }
 
     @DisplayName("GET algorithms counts")
     @ParameterizedTest(name = "/counts/int/{0}")
     @MethodSource("getAlgorithmsCountsCases")
-    void getAlgorithmsCounts(Integer param, Integer[] parsedPram) throws Exception {
+    void getAlgorithmsCounts(Integer param) throws Exception {
         // Arrange
         String url = "/counts/int/" + param;
-        Mockito.when(integersCountingAlgorithmsPresenterService.getAlgorithmsCounts(parsedPram)).thenReturn(null);
+        Mockito.when(integersCountingAlgorithmsPresenterAction.getAlgorithmsCounts(param)).thenReturn(null);
 
         // Act
         mvc.perform(MockMvcRequestBuilders.get(url))
                 // Assert
                 .andExpect(status().isOk());
 
-        verify(integersCountingAlgorithmsPresenterService, times(1)).getAlgorithmsCounts(parsedPram);
+        verify(integersCountingAlgorithmsPresenterAction, times(1)).getAlgorithmsCounts(param);
     }
 
-    private static Stream<Arguments> getAlgorithmsCountsCases() {
-        return Stream.of(
-                arguments(100, new Integer[]{1, 0, 0}),
-                arguments(-10, new Integer[]{1, 0})
-        );
+    private static Stream<Integer> getAlgorithmsCountsCases() {
+        return Stream.of(100, -10);
     }
 
     @DisplayName("GET redirect")
