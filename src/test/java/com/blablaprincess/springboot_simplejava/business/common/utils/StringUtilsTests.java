@@ -11,9 +11,9 @@ import java.util.stream.Stream;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.junit.jupiter.params.provider.Arguments.arguments;
 
-class StringUtilsImplTests {
+class StringUtilsTests {
 
-    private final StringUtilsImpl stringUtils = new StringUtilsImpl();
+    private final StringUtils stringUtils = new StringUtils();
 
     @DisplayName("cropByMaxLength() expect not cropped")
     @ParameterizedTest(name = "{0} input length, {1} max length")
