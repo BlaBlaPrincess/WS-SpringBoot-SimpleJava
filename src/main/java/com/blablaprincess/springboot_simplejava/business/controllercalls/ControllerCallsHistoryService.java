@@ -6,7 +6,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
 
-import java.util.Date;
+import java.time.OffsetDateTime;
 import java.util.List;
 
 @Service
@@ -27,7 +27,7 @@ public class ControllerCallsHistoryService implements ControllerCallsHistory {
     }
 
     @Override
-    public List<ControllerCallDescriptionEntity> getCalls(Date from, Date to) {
+    public List<ControllerCallDescriptionEntity> getCalls(OffsetDateTime from, OffsetDateTime to) {
         return repository.findByTimestampIsBetween(from, to);
     }
 
@@ -38,7 +38,7 @@ public class ControllerCallsHistoryService implements ControllerCallsHistory {
     }
 
     @Override
-    public List<ControllerCallDescriptionEntity> getLastCalls(Date from, Date to, int amount) {
+    public List<ControllerCallDescriptionEntity> getLastCalls(OffsetDateTime from, OffsetDateTime to, int amount) {
         Page<ControllerCallDescriptionEntity> page = repository.findByTimestampIsBetween(from, to, Pageable.ofSize(amount));
         return page.toList();
     }

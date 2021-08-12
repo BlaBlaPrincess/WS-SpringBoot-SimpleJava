@@ -6,7 +6,7 @@ import lombok.*;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Transient;
-import java.util.Date;
+import java.time.OffsetDateTime;
 
 @Data
 @Entity
@@ -24,7 +24,7 @@ public class ControllerCallDescriptionEntity extends UuidEntity {
     @Column(length = MAX_RESPONSE_LENGTH)
     private String response;
 
-    private Date timestamp;
+    private OffsetDateTime timestamp;
 
     private static String cropResponseByMaxLength(String response) {
         int length = response.length();

@@ -1,18 +1,31 @@
 package com.blablaprincess.springboot_simplejava.business.controllercalls;
 
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
-import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
-import java.util.ArrayList;
-import java.util.Date;
+import java.time.LocalDateTime;
+import java.time.OffsetDateTime;
+import java.time.ZoneOffset;
+import java.util.List;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.*;
 
+@SuppressWarnings("unchecked")
 class ControllerCallsHistoryServiceTests {
 
     private final ControllerCallDescriptionsRepository repository = mock(ControllerCallDescriptionsRepository.class);
     private final ControllerCallsHistoryService service = new ControllerCallsHistoryService(repository);
+
+    private static final List<ControllerCallDescriptionEntity> expected = (List<ControllerCallDescriptionEntity>) mock(List.class);
+    private static final Page<ControllerCallDescriptionEntity> expectedPage = (Page<ControllerCallDescriptionEntity>) mock(Page.class);
+
+    @BeforeAll
+    static void setup() {
+        when(expectedPage.toList()).thenReturn(expected);
+    }
 
     @Test
     void saveCall() {
@@ -23,58 +36,65 @@ class ControllerCallsHistoryServiceTests {
         service.saveCall(entity);
 
         // Arrange
-        verify(repository, times(1)).save(entity);
+        verify(repository).save(entity);
     }
 
     @Test
     void getCalls() {
+        // Arrange
+        when(service.getCalls()).thenReturn(expected);
+
         // Act
-        service.getCalls();
+        List<ControllerCallDescriptionEntity> result = service.getCalls();
 
         // Assert
-        verify(repository, times(1)).findAll();
+        assertEquals(expected, result);
+        verify(repository).findAll();
     }
 
     @Test
     void getCallsByDate() {
         // Arrange
-        when(repository.findByTimestampIsBetween(any(Date.class), any(Date.class)))
-                .thenReturn(new ArrayList<>());
+        OffsetDateTime from = OffsetDateTime.of(LocalDateTime.of(2000, 1, 1, 0, 0), ZoneOffset.UTC);
+        OffsetDateTime to   = OffsetDateTime.of(LocalDateTime.of(2010, 1, 1, 0, 0), ZoneOffset.UTC);
+        when(repository.findByTimestampIsBetween(any(OffsetDateTime.class), any(OffsetDateTime.class)))
+                .thenReturn(expected);
 
         // Act
-        service.getCalls(new Date(), new Date());
+        List<ControllerCallDescriptionEntity> result = service.getCalls(from, to);
 
         // Assert
-        verify(repository, times(1))
-                .findByTimestampIsBetween(any(Date.class), any(Date.class));
+        assertEquals(expected, result);
+        verify(repository).findByTimestampIsBetween(eq(from), eq(to));
     }
 
     @Test
     void getLastCalls() {
         // Arrange
-        when(repository.findAll(any(Pageable.class)))
-                .thenReturn(new PageImpl<>(new ArrayList<>()));
+        when(repository.findAll(any(Pageable.class))).thenReturn(expectedPage);
 
         // Act
-        service.getLastCalls(100);
+        List<ControllerCallDescriptionEntity> result = service.getLastCalls(100);
 
         // Assert
-        verify(repository, times(1))
-                .findAll(any(Pageable.class));
+        assertEquals(expected, result);
+        verify(repository).findAll(any(Pageable.class));
     }
 
     @Test
     void getLastCallsByDate() {
         // Arrange
-        when(repository.findByTimestampIsBetween(any(Date.class), any(Date.class), any(Pageable.class)))
-                .thenReturn(new PageImpl<>(new ArrayList<>()));
+        OffsetDateTime from = OffsetDateTime.of(LocalDateTime.of(2000, 1, 1, 0, 0), ZoneOffset.UTC);
+        OffsetDateTime to   = OffsetDateTime.of(LocalDateTime.of(2010, 1, 1, 0, 0), ZoneOffset.UTC);
+        when(repository.findByTimestampIsBetween(any(OffsetDateTime.class), any(OffsetDateTime.class), any(Pageable.class)))
+                .thenReturn(expectedPage);
 
         // Act
-        service.getLastCalls(new Date(), new Date(), 100);
+        List<ControllerCallDescriptionEntity> result = service.getLastCalls(from, to, 100);
 
         // Assert
-        verify(repository, times(1))
-                .findByTimestampIsBetween(any(Date.class), any(Date.class), any(Pageable.class));
+        assertEquals(expected, result);
+        verify(repository).findByTimestampIsBetween(eq(from), eq(to), any(Pageable.class));
     }
 
 }

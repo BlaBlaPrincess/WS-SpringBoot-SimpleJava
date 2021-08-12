@@ -17,9 +17,7 @@ import org.testcontainers.containers.PostgreSQLContainer;
 import org.testcontainers.junit.jupiter.Container;
 import org.testcontainers.junit.jupiter.Testcontainers;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
+import java.time.OffsetDateTime;
 import java.util.List;
 
 import static com.github.database.rider.core.api.configuration.Orthography.LOWERCASE;
@@ -49,8 +47,6 @@ class ControllerCallDescriptionsRepositorySpringPgSqlContainerIT {
     @Autowired
     private ControllerCallDescriptionsRepository repository;
 
-    private final SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
-
     @BeforeEach
     @DataSet(value = "ControllerCallDescriptionEntity.yml")
     void setupDataset() {
@@ -62,25 +58,25 @@ class ControllerCallDescriptionsRepositorySpringPgSqlContainerIT {
     }
 
     @Test
-    void findByTimestampIsBetween() throws ParseException {
+    void findByTimestampIsBetween() {
         // Arrange
-        Date from     = format.parse("01/01/2021 00:00:30");
-        Date to       = format.parse("01/01/2021 00:01:30");
-        Date expected = format.parse("01/01/2021 00:01:00");
+        OffsetDateTime from     = OffsetDateTime.parse("2021-01-01T00:00:30Z");
+        OffsetDateTime to       = OffsetDateTime.parse("2021-01-01T00:01:30Z");
+        OffsetDateTime expected = OffsetDateTime.parse("2021-01-01T00:01:00Z");
 
         // Act
         List<ControllerCallDescriptionEntity> result = repository.findByTimestampIsBetween(from, to);
 
         // Assert
         assertEquals(1, result.size());
-        assertEquals(expected, result.get(0).getTimestamp());
+        assertTrue(expected.isEqual(result.get(0).getTimestamp()));
     }
 
     @Test
-    void findByTimestampIsBetweenWithReversedParams() throws ParseException {
+    void findByTimestampIsBetweenWithReversedParams() {
         // Arrange
-        Date from = format.parse("01/01/2021 00:00:30");
-        Date to   = format.parse("01/01/2021 00:01:30");
+        OffsetDateTime from = OffsetDateTime.parse("2021-01-01T00:00:30Z");
+        OffsetDateTime to   = OffsetDateTime.parse("2021-01-01T00:01:30Z");
 
         // Act
         List<ControllerCallDescriptionEntity> result = repository.findByTimestampIsBetween(to, from);
@@ -90,11 +86,11 @@ class ControllerCallDescriptionsRepositorySpringPgSqlContainerIT {
     }
 
     @Test
-    void findPageByTimestampIsBetween() throws ParseException {
+    void findPageByTimestampIsBetween() {
         // Arrange
-        Date from     = format.parse("01/01/2021 00:00:00");
-        Date to       = format.parse("01/01/2021 00:02:00");
-        Date expected = format.parse("01/01/2021 00:00:00");
+        OffsetDateTime from     = OffsetDateTime.parse("2021-01-01T00:00:00Z");
+        OffsetDateTime to       = OffsetDateTime.parse("2021-01-01T00:02:00Z");
+        OffsetDateTime expected = OffsetDateTime.parse("2021-01-01T00:00:00Z");
 
         // Act
         Page<ControllerCallDescriptionEntity> page = repository.findByTimestampIsBetween(from, to, Pageable.ofSize(1));
@@ -102,7 +98,7 @@ class ControllerCallDescriptionsRepositorySpringPgSqlContainerIT {
 
         // Assert
         assertEquals(1, result.size());
-        assertEquals(expected, result.get(0).getTimestamp());
+        assertTrue(expected.isEqual(result.get(0).getTimestamp()));
     }
 
 }
