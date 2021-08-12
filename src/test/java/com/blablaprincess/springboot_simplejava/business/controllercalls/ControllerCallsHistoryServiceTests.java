@@ -58,8 +58,8 @@ class ControllerCallsHistoryServiceTests {
     @Test
     void getCallsByDate() {
         // Arrange
-        OffsetDateTime from = OffsetDateTime.of(LocalDateTime.of(2000, 1, 1, 0, 0), ZoneOffset.UTC);
-        OffsetDateTime to   = OffsetDateTime.of(LocalDateTime.of(2010, 1, 1, 0, 0), ZoneOffset.UTC);
+        OffsetDateTime from = OffsetDateTime.parse("2000-01-01T00:00Z");
+        OffsetDateTime to   = OffsetDateTime.parse("2010-01-01T00:00Z");
         when(repository.findByTimestampIsBetween(any(OffsetDateTime.class), any(OffsetDateTime.class)))
                 .thenReturn(expected);
 
@@ -87,8 +87,8 @@ class ControllerCallsHistoryServiceTests {
     @Test
     void getLastCallsByDate() {
         // Arrange
-        OffsetDateTime from = OffsetDateTime.of(LocalDateTime.of(2000, 1, 1, 0, 0), ZoneOffset.UTC);
-        OffsetDateTime to   = OffsetDateTime.of(LocalDateTime.of(2010, 1, 1, 0, 0), ZoneOffset.UTC);
+        OffsetDateTime from = OffsetDateTime.parse("2000-01-01T00:00Z");
+        OffsetDateTime to   = OffsetDateTime.parse("2010-01-01T00:00Z");
         when(repository.findByTimestampIsBetween(any(OffsetDateTime.class), any(OffsetDateTime.class), any(Pageable.class)))
                 .thenReturn(expectedPage);
 
