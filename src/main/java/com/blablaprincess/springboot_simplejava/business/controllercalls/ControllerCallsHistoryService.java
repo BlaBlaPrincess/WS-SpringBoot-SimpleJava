@@ -42,7 +42,7 @@ public class ControllerCallsHistoryService implements ControllerCallsHistory {
     @Override
     @Transactional(readOnly = true)
     public List<ControllerCallDescriptionEntity> getLastCalls(int amount) {
-        Pageable request = PageRequest.of(0, amount, Sort.by(Sort.DEFAULT_DIRECTION, "timestamp"));
+        Pageable request = PageRequest.of(0, amount, Sort.by(Sort.Direction.DESC, "timestamp"));
         Page<ControllerCallDescriptionEntity> page = repository.findAll(request);
         return page.toList();
     }
@@ -50,7 +50,7 @@ public class ControllerCallsHistoryService implements ControllerCallsHistory {
     @Override
     @Transactional(readOnly = true)
     public List<ControllerCallDescriptionEntity> getLastCalls(OffsetDateTime from, OffsetDateTime to, int amount) {
-        Pageable request = PageRequest.of(0, amount, Sort.by("timestamp"));
+        Pageable request = PageRequest.of(0, amount, Sort.by(Sort.Direction.DESC, "timestamp"));
         Page<ControllerCallDescriptionEntity> page = repository.findByTimestampIsBetween(from, to, request);
         return page.toList();
     }
