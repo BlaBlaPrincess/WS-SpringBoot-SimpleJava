@@ -9,7 +9,7 @@ public class StringUtils {
         int length = str.length();
         if (length > maxLength) {
             int half = maxLength / 2;
-            return str.substring(0, half - 5) + "… … …" + str.substring(length - half, length - 1);
+            return str.substring(0, half - half % 2) + "…" + str.substring(length - half, length);
         }
         return str;
     }
