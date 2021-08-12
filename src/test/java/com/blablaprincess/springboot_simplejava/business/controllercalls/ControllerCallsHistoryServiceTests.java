@@ -1,5 +1,6 @@
 package com.blablaprincess.springboot_simplejava.business.controllercalls;
 
+import com.blablaprincess.springboot_simplejava.business.common.utils.StringUtils;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.springframework.data.domain.Page;
@@ -17,7 +18,8 @@ import static org.mockito.Mockito.*;
 class ControllerCallsHistoryServiceTests {
 
     private final ControllerCallDescriptionsRepository repository = mock(ControllerCallDescriptionsRepository.class);
-    private final ControllerCallsHistoryService service = new ControllerCallsHistoryService(repository);
+    private final StringUtils stringUtils = mock(StringUtils.class);
+    private final ControllerCallsHistoryService service = new ControllerCallsHistoryService(repository, stringUtils);
 
     private static final List<ControllerCallDescriptionEntity> expected = (List<ControllerCallDescriptionEntity>) mock(List.class);
     private static final Page<ControllerCallDescriptionEntity> expectedPage = (Page<ControllerCallDescriptionEntity>) mock(Page.class);
@@ -36,6 +38,7 @@ class ControllerCallsHistoryServiceTests {
         service.saveCall(entity);
 
         // Arrange
+        verify(stringUtils).cropByMaxLength(entity.getResponse(), ControllerCallDescriptionEntity.MAX_RESPONSE_LENGTH);
         verify(repository).save(entity);
     }
 

@@ -1,9 +1,9 @@
 package com.blablaprincess.springboot_simplejava.business.controllercalls;
 
+import com.blablaprincess.springboot_simplejava.business.common.utils.StringUtils;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
-import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
 
 import java.time.OffsetDateTime;
@@ -14,10 +14,12 @@ import java.util.List;
 public class ControllerCallsHistoryService implements ControllerCallsHistory {
 
     private final ControllerCallDescriptionsRepository repository;
+    private final StringUtils stringUtils;
 
     @Override
-    @Async("telegramBotNotifierServiceTaskExecutor")
     public void saveCall(ControllerCallDescriptionEntity call) {
+        String croppedResponse = stringUtils.cropByMaxLength(call.getResponse(), ControllerCallDescriptionEntity.MAX_RESPONSE_LENGTH);
+        call.setResponse(croppedResponse);
         repository.save(call);
     }
 
