@@ -10,7 +10,9 @@ import org.junit.jupiter.api.parallel.ExecutionMode;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.test.context.DynamicPropertyRegistry;
 import org.springframework.test.context.DynamicPropertySource;
 import org.testcontainers.containers.PostgreSQLContainer;
@@ -91,9 +93,10 @@ class ControllerCallDescriptionsRepositorySpringPgSqlContainerIT {
         OffsetDateTime from     = OffsetDateTime.parse("2021-01-01T00:00:00Z");
         OffsetDateTime to       = OffsetDateTime.parse("2021-01-01T00:02:00Z");
         OffsetDateTime expected = OffsetDateTime.parse("2021-01-01T00:00:00Z");
+        Pageable request = PageRequest.of(0, 1, Sort.by("timestamp"));
 
         // Act
-        Page<ControllerCallDescriptionEntity> page = repository.findByTimestampIsBetween(from, to, Pageable.ofSize(1));
+        Page<ControllerCallDescriptionEntity> page = repository.findByTimestampIsBetween(from, to, request);
         List<ControllerCallDescriptionEntity> result = page.toList();
 
         // Assert
