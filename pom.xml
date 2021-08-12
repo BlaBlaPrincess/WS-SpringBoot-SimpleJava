@@ -15,6 +15,12 @@
 	<description>Simple java project for Spring Boot</description>
 	<properties>
 		<java.version>1.8</java.version>
+
+		<springfox.boot.starter.version>3.0.0</springfox.boot.starter.version>
+		<reflections.version>0.9.11</reflections.version>
+
+		<rider.junit5.version>1.27.0</rider.junit5.version>
+		<testcontainers.version>1.15.3</testcontainers.version>
 	</properties>
 	<dependencies>
 		<!-- Spring boot starters -->
@@ -45,30 +51,30 @@
 		<dependency>
 			<groupId>io.springfox</groupId>
 			<artifactId>springfox-boot-starter</artifactId>
-			<version>3.0.0</version>
+			<version>${springfox.boot.starter.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>org.reflections</groupId>
 			<artifactId>reflections</artifactId>
-			<version>0.9.11</version>
+			<version>${reflections.version}</version>
 		</dependency>
 		<!-- Tests -->
 		<dependency>
 			<groupId>com.github.database-rider</groupId>
 			<artifactId>rider-junit5</artifactId>
-			<version>1.27.0</version>
+			<version>${rider.junit5.version}</version>
 			<scope>test</scope>
 		</dependency>
 		<dependency>
 			<groupId>org.testcontainers</groupId>
 			<artifactId>postgresql</artifactId>
-			<version>1.15.3</version>
+			<version>${testcontainers.version}</version>
 			<scope>test</scope>
 		</dependency>
 		<dependency>
 			<groupId>org.testcontainers</groupId>
 			<artifactId>junit-jupiter</artifactId>
-			<version>1.15.3</version>
+			<version>${testcontainers.version}</version>
 			<scope>test</scope>
 		</dependency>
 	</dependencies>
