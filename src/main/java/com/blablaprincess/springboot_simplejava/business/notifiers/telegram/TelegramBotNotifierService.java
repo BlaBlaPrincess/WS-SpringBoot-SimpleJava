@@ -45,8 +45,8 @@ public class TelegramBotNotifierService implements Notifier {
               .block();
     }
 
-    private void logNotificationFailed(Throwable e) {
-        log.warn(String.format("Telegram notification failed. Cause: %s (%s)", e.getCause(), e.getMessage()));
+    private void logNotificationFailed(Throwable throwable) {
+        log.error("Telegram notification failed.", throwable);
     }
 
 }
