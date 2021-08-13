@@ -20,7 +20,7 @@ class ControllerCallsHistoryAfterDispatchingProcessorUT {
         controllerCallsHistoryAfterDispatchingProcessor.process("", mock(HttpServletRequest.class), mock(HttpServletResponse.class));
 
         // Assert
-        verify(service, times(1)).saveCall(any(ControllerCallDescriptionEntity.class));
+        verify(service).saveCall(any(ControllerCallDescriptionEntity.class));
     }
 
 }

@@ -193,7 +193,7 @@ class ExceptionsHandlerMvcIT {
         assertEquals(param.exception.getClass().getName(),                     result.getClassName());
         assertEquals(ExceptionTestConfig.ExceptionTestController.DO_STAFF_URI, result.getPath());
 
-        verify(thrower, times(1)).doWork();
+        verify(thrower).doWork();
     }
 
 }

@@ -39,7 +39,7 @@ class IntegersCountingAlgorithmsPresenterActionUT {
 
         // Assert
         assertEquals(expected, result);
-        verify(presenter, times(1)).getAlgorithms();
+        verify(presenter).getAlgorithms();
     }
 
     @DisplayName("getAlgorithmsCounts()")
@@ -55,8 +55,8 @@ class IntegersCountingAlgorithmsPresenterActionUT {
 
         // Assert
         assertEquals(expected, result);
-        verify(validators, times(1)).validate(anyInt());
-        verify(presenter,  times(1)).getAlgorithmsCounts(parsedParam);
+        verify(validators).validate(anyInt());
+        verify(presenter).getAlgorithmsCounts(parsedParam);
     }
 
     private static Stream<Arguments> getAlgorithmsCountsCases() {

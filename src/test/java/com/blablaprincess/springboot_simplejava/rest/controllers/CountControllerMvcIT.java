@@ -52,10 +52,10 @@ class CountControllerMvcIT {
                 // Assert
                 .andExpect(status().isOk());
 
-        verify(integersCountingAlgorithmsPresenterAction, times(1)).getAlgorithms();
+        verify(integersCountingAlgorithmsPresenterAction).getAlgorithms();
 
-        verify(telegramBotNotifierAfterDispatchingProcessor, times(1)).process(any(), any(), any());
-        verify(controllerCallsHistoryAfterDispatchingProcessor, times(1)).process(any(), any(), any());
+        verify(telegramBotNotifierAfterDispatchingProcessor).process(any(), any(), any());
+        verify(controllerCallsHistoryAfterDispatchingProcessor).process(any(), any(), any());
     }
 
     @DisplayName("GET algorithms counts")
@@ -71,10 +71,10 @@ class CountControllerMvcIT {
                 // Assert
                 .andExpect(status().isOk());
 
-        verify(integersCountingAlgorithmsPresenterAction, times(1)).getAlgorithmsCounts(param);
+        verify(integersCountingAlgorithmsPresenterAction).getAlgorithmsCounts(param);
 
-        verify(telegramBotNotifierAfterDispatchingProcessor, times(1)).process(any(), any(), any());
-        verify(controllerCallsHistoryAfterDispatchingProcessor, times(1)).process(any(), any(), any());
+        verify(telegramBotNotifierAfterDispatchingProcessor).process(any(), any(), any());
+        verify(controllerCallsHistoryAfterDispatchingProcessor).process(any(), any(), any());
     }
 
     private static Stream<Integer> getAlgorithmsCountsCases() {
@@ -95,8 +95,8 @@ class CountControllerMvcIT {
                 .andExpect(status().isPermanentRedirect())
                 .andExpect(redirectedUrl(to));
 
-        verify(telegramBotNotifierAfterDispatchingProcessor, times(1)).process(any(), any(), any());
-        verify(controllerCallsHistoryAfterDispatchingProcessor, times(1)).process(any(), any(), any());
+        verify(telegramBotNotifierAfterDispatchingProcessor).process(any(), any(), any());
+        verify(controllerCallsHistoryAfterDispatchingProcessor).process(any(), any(), any());
     }
 
     private static Stream<String> redirectCountsForIntegerToIntCases() {

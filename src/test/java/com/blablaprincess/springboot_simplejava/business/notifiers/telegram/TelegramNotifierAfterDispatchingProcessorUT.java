@@ -21,7 +21,7 @@ class TelegramNotifierAfterDispatchingProcessorUT {
         telegramBotNotifierAfterDispatchingProcessor.process("", mock(HttpServletRequest.class), mock(HttpServletResponse.class));
 
         // Assert
-        verify(service, times(1)).sendNotification(anyString());
+        verify(service).sendNotification(anyString());
     }
 
 }

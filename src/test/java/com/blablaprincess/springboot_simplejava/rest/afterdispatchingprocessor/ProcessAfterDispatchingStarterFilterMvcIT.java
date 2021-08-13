@@ -184,7 +184,7 @@ class ProcessAfterDispatchingStarterFilterMvcIT {
            // Assert
            .andExpect(status().isOk());
 
-        verify(worker, times(1)).doWork();
+        verify(worker).doWork();
         verify(afterDispatchingProcessor, times(wantedNumberOfAfterDispatchingProcessorInvocations)).process(any(), any(), any());
         verify(afterDispatchingProcessor, times(wantedNumberOfAfterDispatchingProcessorInvocations)).process(eq(response), any(), any());
     }
@@ -202,7 +202,7 @@ class ProcessAfterDispatchingStarterFilterMvcIT {
            // Assert
            .andExpect(status().is(EXCEPTION_STATUS_CODE));
 
-        verify(worker, times(1)).doWork();
+        verify(worker).doWork();
         verify(afterDispatchingProcessor, times(wantedNumberOfAfterDispatchingProcessorInvocations)).process(any(), any(), any());
         verify(afterDispatchingProcessor, times(wantedNumberOfAfterDispatchingProcessorInvocations)).process(eq(message), any(), any());
     }
