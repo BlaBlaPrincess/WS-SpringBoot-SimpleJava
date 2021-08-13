@@ -4,9 +4,9 @@ import com.blablaprincess.springboot_simplejava.business.common.utils.IntUtils;
 import com.blablaprincess.springboot_simplejava.business.validation.ValidationException;
 import com.blablaprincess.springboot_simplejava.business.validation.Validator;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.context.annotation.PropertySource;
-import org.springframework.core.env.Environment;
 import org.springframework.stereotype.Component;
 
 @Component
@@ -14,21 +14,11 @@ import org.springframework.stereotype.Component;
 @ConditionalOnProperty(name = "validation.int.max-length.enabled", havingValue = "true")
 public class MaxLengthValidator implements Validator<Integer> {
 
+    @Value("${validation.int.max-length:8}")
     private final Integer MAX_LENGTH;
 
     @Autowired
-    public MaxLengthValidator(Environment environment) {
-        int maxLength = 8;
-
-        String property = environment.getProperty("validation.int.max-length");
-        if (property != null) {
-            try {
-                maxLength = Integer.parseInt(property);
-            } catch (NumberFormatException ignored) {
-
-            }
-        }
-
+    public MaxLengthValidator(@Value("${validation.int.max-length:8}") int maxLength) {
         MAX_LENGTH = maxLength;
     }
 

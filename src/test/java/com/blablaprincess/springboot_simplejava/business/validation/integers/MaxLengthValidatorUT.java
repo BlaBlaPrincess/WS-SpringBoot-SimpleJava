@@ -5,7 +5,6 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
-import org.springframework.mock.env.MockEnvironment;
 
 import java.util.stream.Stream;
 
@@ -15,48 +14,34 @@ import static org.junit.jupiter.params.provider.Arguments.arguments;
 class MaxLengthValidatorUT {
 
     private interface TestScenario {
-        void test(Integer value, String property);
+        void test(Integer value, int maxLength);
     }
 
-    private static MockEnvironment getEnvironment(String property) {
-        MockEnvironment environment = new MockEnvironment();
-        if (property != null) {
-            environment.setProperty("validation.int.max-length", property);
-        }
-        return environment;
-    }
-
-    private static final TestScenario toDoesNotThrows = (value, property) -> {
-        // Arrange
-        MockEnvironment environment = getEnvironment(property);
+    private static final TestScenario toDoesNotThrows = (value, maxLength) -> {
         // Act + Assert
-        assertDoesNotThrow(() -> new MaxLengthValidator(environment).validate(value));
+        assertDoesNotThrow(() -> new MaxLengthValidator(maxLength).validate(value));
     };
 
-    private static final TestScenario toThrows = (value, property) -> {
-        // Arrange
-        MockEnvironment environment = getEnvironment(property);
+    private static final TestScenario toThrows = (value, maxLength) -> {
         // Act + Assert
-        assertThrows(ValidationException.class, () -> new MaxLengthValidator(environment).validate(value));
+        assertThrows(ValidationException.class, () -> new MaxLengthValidator(maxLength).validate(value));
     };
 
     @DisplayName("validate")
-    @ParameterizedTest(name = "with {0}, property: {1}")
+    @ParameterizedTest(name = "with {0}, max length: {1}")
     @MethodSource("getValidateCases")
-    void validateArrayNotEmpty(Integer value, String property, TestScenario testScenario) {
-        testScenario.test(value, property);
+    void validateArrayNotEmpty(Integer value, int maxLength, TestScenario testScenario) {
+        testScenario.test(value, maxLength);
     }
 
     static Stream<Arguments> getValidateCases() {
         return Stream.of(
-                arguments(12345678,  null,  toDoesNotThrows),
-                arguments(123456789, null,  toThrows),
-                arguments(12345678,  "any", toDoesNotThrows),
-                arguments(123456789, "any", toThrows),
-                arguments(123456789, "9",   toDoesNotThrows),
-                arguments(1234,      "4",   toDoesNotThrows),
-                arguments(12345,     "4",   toThrows),
-                arguments(0,         "-1",  toThrows)
+                arguments(12345678,  8, toDoesNotThrows),
+                arguments(123456789, 8, toThrows),
+                arguments(123456789, 9, toDoesNotThrows),
+                arguments(1234,      4, toDoesNotThrows),
+                arguments(12345,     4, toThrows),
+                arguments(0,        -1, toThrows)
         );
     }
 

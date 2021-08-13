@@ -1,12 +1,13 @@
 package com.blablaprincess.springboot_simplejava.business.controllercalls;
 
+import com.blablaprincess.springboot_simplejava.business.common.persistence.OptionalPredicateBuilder;
+import com.blablaprincess.springboot_simplejava.business.common.utils.StringUtils;
+import com.google.common.collect.Lists;
+import com.querydsl.core.types.Predicate;
 import lombok.RequiredArgsConstructor;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
-import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
-import java.util.Date;
 import java.util.List;
 
 @Service
@@ -14,33 +15,27 @@ import java.util.List;
 public class ControllerCallsHistoryService implements ControllerCallsHistory {
 
     private final ControllerCallDescriptionsRepository repository;
+    private final StringUtils stringUtils;
+
+    private final QControllerCallDescriptionEntity qEntity = QControllerCallDescriptionEntity.controllerCallDescriptionEntity;
 
     @Override
-    @Async("telegramBotNotifierServiceTaskExecutor")
+    @Transactional
     public void saveCall(ControllerCallDescriptionEntity call) {
+        String croppedResponse = stringUtils.cropByMaxLength(call.getResponse(), ControllerCallDescriptionEntity.MAX_RESPONSE_LENGTH);
+        call.setResponse(croppedResponse);
         repository.save(call);
     }
 
     @Override
-    public List<ControllerCallDescriptionEntity> getCalls() {
-        return repository.findAll();
-    }
+    @Transactional(readOnly = true)
+    public List<ControllerCallDescriptionEntity> getLastCalls(ControllerCallsHistoryLastCallsArgs args) {
+        Predicate predicate
+                = new OptionalPredicateBuilder().optionalAnd(args.getTimestampAfter(), qEntity.timestamp::goe)
+                                                .optionalAnd(args.getTimestampBefore(), qEntity.timestamp::loe)
+                                                .build();
 
-    @Override
-    public List<ControllerCallDescriptionEntity> getCalls(Date from, Date to) {
-        return repository.findByTimestampIsBetween(from, to);
-    }
-
-    @Override
-    public List<ControllerCallDescriptionEntity> getLastCalls(int amount) {
-        Page<ControllerCallDescriptionEntity> page = repository.findAll(Pageable.ofSize(amount));
-        return page.toList();
-    }
-
-    @Override
-    public List<ControllerCallDescriptionEntity> getLastCalls(Date from, Date to, int amount) {
-        Page<ControllerCallDescriptionEntity> page = repository.findByTimestampIsBetween(from, to, Pageable.ofSize(amount));
-        return page.toList();
+        return Lists.newArrayList(repository.findAll(predicate));
     }
 
 }
