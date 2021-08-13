@@ -12,7 +12,7 @@ import java.util.concurrent.Executor;
 public class AsyncConfig {
 
     @Bean(name = "telegramBotNotifierServiceTaskExecutor")
-    public Executor threadPoolTaskExecutor() {
+    public Executor telegramBotNotifierServiceTaskExecutor() {
         ThreadPoolTaskExecutor executor = new ThreadPoolTaskExecutor();
         executor.setThreadNamePrefix("tg-notifier-");
         executor.initialize();
