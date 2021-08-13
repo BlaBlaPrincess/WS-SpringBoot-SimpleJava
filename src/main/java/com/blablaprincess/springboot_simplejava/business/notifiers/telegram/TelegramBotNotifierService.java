@@ -22,10 +22,11 @@ public class TelegramBotNotifierService implements Notifier {
     private final WebClient client;
 
     public TelegramBotNotifierService(@Value("${telegram-bot.http-token}") String httpToken,
-                                      @Value("${telegram-bot.chat-id}") String chatId) {
+                                      @Value("${telegram-bot.chat-id}") String chatId,
+                                      WebClient client) {
         HTTP_TOKEN = httpToken;
         CHAT_ID = chatId;
-        client = WebClient.create();
+        this.client = client;
 
         SEND_MESSAGE_TEMPLATE = String.format("https://api.telegram.org/bot%s/sendMessage?chat_id=%s&text={message}", HTTP_TOKEN, CHAT_ID);
     }
