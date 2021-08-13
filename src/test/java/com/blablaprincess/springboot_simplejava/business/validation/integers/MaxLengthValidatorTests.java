@@ -36,12 +36,11 @@ class MaxLengthValidatorTests {
 
     static Stream<Arguments> getValidateCases() {
         return Stream.of(
-                arguments(12345678,  8, toDoesNotThrows),
-                arguments(123456789, 8, toThrows),
-                arguments(123456789, 9, toDoesNotThrows),
-                arguments(1234,      4, toDoesNotThrows),
-                arguments(12345,     4, toThrows),
-                arguments(0,        -1, toThrows)
+                arguments(12345,  4, toThrows),
+                arguments(1234,   4, toDoesNotThrows),
+                arguments(1234,   3, toThrows),
+                arguments(123,    3, toDoesNotThrows),
+                arguments(0,     -1, toThrows)
         );
     }
 
