@@ -1,15 +1,13 @@
 package com.blablaprincess.springboot_simplejava.business.controllercalls;
 
+import com.blablaprincess.springboot_simplejava.business.common.persistence.OptionalPredicateBuilder;
 import com.blablaprincess.springboot_simplejava.business.common.utils.StringUtils;
+import com.google.common.collect.Lists;
+import com.querydsl.core.types.Predicate;
 import lombok.RequiredArgsConstructor;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Pageable;
-import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.time.OffsetDateTime;
 import java.util.List;
 
 @Service
@@ -18,6 +16,8 @@ public class ControllerCallsHistoryService implements ControllerCallsHistory {
 
     private final ControllerCallDescriptionsRepository repository;
     private final StringUtils stringUtils;
+
+    private final QControllerCallDescriptionEntity qEntity = QControllerCallDescriptionEntity.controllerCallDescriptionEntity;
 
     @Override
     @Transactional
@@ -29,30 +29,13 @@ public class ControllerCallsHistoryService implements ControllerCallsHistory {
 
     @Override
     @Transactional(readOnly = true)
-    public List<ControllerCallDescriptionEntity> getCalls() {
-        return repository.findAll();
-    }
+    public List<ControllerCallDescriptionEntity> getLastCalls(ControllerCallsHistoryLastCallsArgs args) {
+        Predicate predicate
+                = new OptionalPredicateBuilder().optionalAnd(args.getTimestampAfter(), qEntity.timestamp::goe)
+                                                .optionalAnd(args.getTimestampBefore(), qEntity.timestamp::loe)
+                                                .build();
 
-    @Override
-    @Transactional(readOnly = true)
-    public List<ControllerCallDescriptionEntity> getCalls(OffsetDateTime from, OffsetDateTime to) {
-        return repository.findByTimestampIsBetween(from, to);
-    }
-
-    @Override
-    @Transactional(readOnly = true)
-    public List<ControllerCallDescriptionEntity> getLastCalls(int amount) {
-        Pageable request = PageRequest.of(0, amount, Sort.by(Sort.Direction.DESC, "timestamp"));
-        Page<ControllerCallDescriptionEntity> page = repository.findAll(request);
-        return page.toList();
-    }
-
-    @Override
-    @Transactional(readOnly = true)
-    public List<ControllerCallDescriptionEntity> getLastCalls(OffsetDateTime from, OffsetDateTime to, int amount) {
-        Pageable request = PageRequest.of(0, amount, Sort.by(Sort.Direction.DESC, "timestamp"));
-        Page<ControllerCallDescriptionEntity> page = repository.findByTimestampIsBetween(from, to, request);
-        return page.toList();
+        return Lists.newArrayList(repository.findAll(predicate));
     }
 
 }

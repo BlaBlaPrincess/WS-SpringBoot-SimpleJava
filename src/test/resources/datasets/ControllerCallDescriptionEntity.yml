@@ -2,8 +2,8 @@ controller_call_description_entity:
   - id: 00000000-0000-1000-8000-000000000000
     mapping: /controller_calls_repository_test__/do_stuff/0
     response: response 0
-    timestamp: '2021-01-01 00:00:00.000'
+    timestamp: '2021-01-01 00:00:00'
   - id: 00000000-0000-1000-8000-000000000001
     mapping: /controller_calls_repository_test__/do_stuff/1
     response: response 1
-    timestamp: '2021-01-01 00:01:00.000'
+    timestamp: '2021-01-01 01:00:00'

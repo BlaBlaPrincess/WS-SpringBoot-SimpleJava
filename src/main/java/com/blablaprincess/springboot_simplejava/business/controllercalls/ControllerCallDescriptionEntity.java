@@ -6,7 +6,7 @@ import lombok.*;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Transient;
-import java.time.OffsetDateTime;
+import java.time.LocalDateTime;
 
 @Data
 @Entity
@@ -24,6 +24,6 @@ public class ControllerCallDescriptionEntity extends UuidEntity {
     @Column(length = MAX_RESPONSE_LENGTH)
     private String response;
 
-    private OffsetDateTime timestamp;
+    private LocalDateTime timestamp;
 
 }
