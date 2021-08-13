@@ -6,7 +6,7 @@ import lombok.*;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Transient;
-import java.util.Date;
+import java.time.OffsetDateTime;
 
 @Data
 @Entity
@@ -24,29 +24,6 @@ public class ControllerCallDescriptionEntity extends UuidEntity {
     @Column(length = MAX_RESPONSE_LENGTH)
     private String response;
 
-    private Date timestamp;
-
-    private static String cropResponseByMaxLength(String response) {
-        int length = response.length();
-        if (length > MAX_RESPONSE_LENGTH) {
-            int half = MAX_RESPONSE_LENGTH / 2;
-            return response.substring(0, half - 5) + "… … …" + response.substring(length - half, length - 1);
-        }
-        return response;
-    }
-
-    public void setResponse(String response) {
-        this.response = cropResponseByMaxLength(response);
-    }
-
-    @SuppressWarnings("FieldCanBeLocal")
-    public static class ControllerCallDescriptionEntityBuilder {
-        private String response;
-
-        public ControllerCallDescriptionEntityBuilder response(String response) {
-            this.response = cropResponseByMaxLength(response);
-            return this;
-        }
-    }
+    private OffsetDateTime timestamp;
 
 }
