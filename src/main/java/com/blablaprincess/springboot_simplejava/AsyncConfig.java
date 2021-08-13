@@ -19,4 +19,12 @@ public class AsyncConfig {
         return executor;
     }
 
+    @Bean(name = "controllerCallsHistoryServiceTaskExecutor")
+    public Executor controllerCallsHistoryServiceTaskExecutor() {
+        ThreadPoolTaskExecutor executor = new ThreadPoolTaskExecutor();
+        executor.setThreadNamePrefix("cch-service-");
+        executor.initialize();
+        return executor;
+    }
+
 }
