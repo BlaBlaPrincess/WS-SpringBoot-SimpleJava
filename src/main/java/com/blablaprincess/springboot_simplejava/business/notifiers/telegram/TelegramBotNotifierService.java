@@ -14,26 +14,20 @@ import java.net.URI;
 @Service
 public class TelegramBotNotifierService implements Notifier {
 
-    public final String HTTP_TOKEN;
-    public final String CHAT_ID;
-
-    private final String SEND_MESSAGE_TEMPLATE;
+    private final String sendMessageTemplate;
 
     private final WebClient client;
 
     public TelegramBotNotifierService(@Value("${telegram-bot.http-token}") String httpToken,
                                       @Value("${telegram-bot.chat-id}") String chatId,
                                       WebClient client) {
-        HTTP_TOKEN = httpToken;
-        CHAT_ID = chatId;
         this.client = client;
-
-        SEND_MESSAGE_TEMPLATE = String.format("https://api.telegram.org/bot%s/sendMessage?chat_id=%s&text={message}", HTTP_TOKEN, CHAT_ID);
+        sendMessageTemplate = String.format("https://api.telegram.org/bot%s/sendMessage?chat_id=%s&text={message}", httpToken, chatId);
     }
 
     @Override
     public void sendNotification(String message) {
-        URI uri = UriComponentsBuilder.fromHttpUrl(SEND_MESSAGE_TEMPLATE)
+        URI uri = UriComponentsBuilder.fromHttpUrl(sendMessageTemplate)
                                       .buildAndExpand(message)
                                       .toUri();
 
