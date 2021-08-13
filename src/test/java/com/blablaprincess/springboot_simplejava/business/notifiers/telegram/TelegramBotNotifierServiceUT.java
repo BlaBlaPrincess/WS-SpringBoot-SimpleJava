@@ -11,12 +11,12 @@ import reactor.core.publisher.Mono;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.*;
 
-class TelegramBotNotifierServiceTests {
+class TelegramBotNotifierServiceUT {
 
     private final TelegramBotNotifierService service;
     private final ExchangeFunction exchangeFunction = mock(ExchangeFunction.class);
 
-    TelegramBotNotifierServiceTests() {
+    TelegramBotNotifierServiceUT() {
         WebClient webClient = WebClient.builder()
                 .exchangeFunction(exchangeFunction)
                 .build();

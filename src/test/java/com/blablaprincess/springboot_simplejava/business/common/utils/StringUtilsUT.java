@@ -10,7 +10,7 @@ import java.util.stream.Stream;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.junit.jupiter.params.provider.Arguments.arguments;
 
-class StringUtilsTests {
+class StringUtilsUT {
 
     private final StringUtils stringUtils = new StringUtils();
 
