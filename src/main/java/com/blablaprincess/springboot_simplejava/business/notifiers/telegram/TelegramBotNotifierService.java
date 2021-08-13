@@ -34,7 +34,7 @@ public class TelegramBotNotifierService implements Notifier {
         client.get()
               .uri(uri)
               .retrieve()
-              .bodyToMono(JsonNode.class)
+              .toBodilessEntity()
               .doOnError(this::logNotificationFailed)
               .block();
     }
