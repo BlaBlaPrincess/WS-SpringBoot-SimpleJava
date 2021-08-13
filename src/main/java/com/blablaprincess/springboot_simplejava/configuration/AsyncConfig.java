@@ -12,9 +12,17 @@ import java.util.concurrent.Executor;
 public class AsyncConfig {
 
     @Bean(name = "telegramBotNotifierServiceTaskExecutor")
-    public Executor threadPoolTaskExecutor() {
+    public Executor telegramBotNotifierServiceTaskExecutor() {
         ThreadPoolTaskExecutor executor = new ThreadPoolTaskExecutor();
         executor.setThreadNamePrefix("tg-notifier-");
+        executor.initialize();
+        return executor;
+    }
+
+    @Bean(name = "controllerCallsHistoryServiceTaskExecutor")
+    public Executor controllerCallsHistoryServiceTaskExecutor() {
+        ThreadPoolTaskExecutor executor = new ThreadPoolTaskExecutor();
+        executor.setThreadNamePrefix("cch-service-");
         executor.initialize();
         return executor;
     }
