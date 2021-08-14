@@ -12,7 +12,7 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.*;
 
-class SignTelegramProfilerAspectTest {
+class SignTelegramProfilerAspectUT {
 
     private final TelegramBotNotifierService service =
             mock(TelegramBotNotifierService.class);
