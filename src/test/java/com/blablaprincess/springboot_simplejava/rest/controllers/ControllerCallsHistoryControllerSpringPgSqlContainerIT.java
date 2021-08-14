@@ -8,6 +8,7 @@ import com.github.database.rider.core.api.dataset.DataSet;
 import com.github.database.rider.junit5.api.DBRider;
 import lombok.RequiredArgsConstructor;
 import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.parallel.Execution;
 import org.junit.jupiter.api.parallel.ExecutionMode;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -20,7 +21,9 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.testcontainers.junit.jupiter.Testcontainers;
 
+import java.time.LocalDateTime;
 import java.util.List;
+import java.util.UUID;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -37,6 +40,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @DBRider
 @DBUnit(cacheConnection = false, leakHunter = true, caseInsensitiveStrategy = LOWERCASE)
 @RequiredArgsConstructor
+@SuppressWarnings("ArraysAsListWithZeroOrOneArgument")
 class ControllerCallsHistoryControllerSpringPgSqlContainerIT {
 
     @Autowired
@@ -45,24 +49,50 @@ class ControllerCallsHistoryControllerSpringPgSqlContainerIT {
     @Autowired
     private ObjectMapper mapper;
 
-    @DisplayName("GET /calls")
-    @ParameterizedTest(name = "/calls{0}")
-    @MethodSource("getCallsCases")
-    @DataSet(value = "ControllerCallDescriptionEntity.yml")
-    void getControllerCalls(String urlParams, List<String> expected) throws Exception {
+    private final String TdsSource = "ControllerCallsHistoryController/";
+
+    @Test
+    @DataSet(TdsSource + "GetControllerCallDescriptionEntityTDS.yml")
+    void getControllerCallDescriptionEntity() throws Exception {
         // Arrange
-        String urlBase = "/calls";
+        ControllerCallDescriptionEntity entity =
+                ControllerCallDescriptionEntity.builder()
+                        .mapping("mapping")
+                        .response("response")
+                        .timestamp(LocalDateTime.parse("2010-01-01T00:00"))
+                        .build();
+        entity.setId(UUID.fromString("10000000-1000-1000-9000-900000000000"));
+        List<ControllerCallDescriptionEntity> expected = asList(entity);
+
 
         // Act
-        String responseBody = mvc.perform(MockMvcRequestBuilders.get(urlBase + urlParams))
+        String responseBody = mvc.perform(MockMvcRequestBuilders.get("/calls"))
                 .andExpect(status().isOk())
                 .andReturn()
                 .getResponse()
                 .getContentAsString();
 
         List<ControllerCallDescriptionEntity> response =
-                mapper.readValue(responseBody, new TypeReference<List<ControllerCallDescriptionEntity>>() {
-                });
+                mapper.readValue(responseBody, new TypeReference<List<ControllerCallDescriptionEntity>>() {});
+
+        // Assert
+        assertEquals(expected, response);
+    }
+
+    @DisplayName("GET /calls")
+    @ParameterizedTest(name = "{0}")
+    @MethodSource("getCallsCases")
+    @DataSet(TdsSource + "GetControllerCallsTDS.yml")
+    void getControllerCalls(String url, List<String> expected) throws Exception {
+        // Act
+        String responseBody = mvc.perform(MockMvcRequestBuilders.get(url))
+                .andExpect(status().isOk())
+                .andReturn()
+                .getResponse()
+                .getContentAsString();
+
+        List<ControllerCallDescriptionEntity> response =
+                mapper.readValue(responseBody, new TypeReference<List<ControllerCallDescriptionEntity>>() {});
 
         List<String> responseValues = response.stream()
                 .map(ControllerCallDescriptionEntity::getResponse)
@@ -72,18 +102,17 @@ class ControllerCallsHistoryControllerSpringPgSqlContainerIT {
         assertEquals(expected, responseValues);
     }
 
-    @SuppressWarnings("ArraysAsListWithZeroOrOneArgument")
     static Stream<Arguments> getCallsCases() {
         return Stream.of(
-                arguments("",
+                arguments(url(),
                         asList("response 0", "response 1")),
-                arguments(params(after("00:30")),
+                arguments(url(after("00:30")),
                         asList("response 1")),
-                arguments(params(before("00:30")),
+                arguments(url(before("00:30")),
                         asList("response 0")),
-                arguments(params(after("00:00"), before("01:00")),
+                arguments(url(after("00:00"), before("01:00")),
                         asList("response 0", "response 1")),
-                arguments(params(after("01:00"), before("00:00")),
+                arguments(url(after("01:00"), before("00:00")),
                         asList())
         );
     }
@@ -96,8 +125,8 @@ class ControllerCallsHistoryControllerSpringPgSqlContainerIT {
         return "timestampBefore=2021-01-01 " + time;
     }
 
-    private static String params(String... params) {
-        return "?" + String.join("&", params);
+    private static String url(String... params) {
+        return "/calls?" + String.join("&", params);
     }
 
 }
