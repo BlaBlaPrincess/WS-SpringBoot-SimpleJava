@@ -1,4 +1,4 @@
-package com.blablaprincess.springboot_simplejava.business.notifiers.telegram;
+package com.blablaprincess.springboot_simplejava.business.notifiers.telegram.profiler;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;

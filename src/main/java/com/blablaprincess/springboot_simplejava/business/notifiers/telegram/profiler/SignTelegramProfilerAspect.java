@@ -1,5 +1,7 @@
-package com.blablaprincess.springboot_simplejava.business.notifiers.telegram;
+package com.blablaprincess.springboot_simplejava.business.notifiers.telegram.profiler;
 
+import com.blablaprincess.springboot_simplejava.business.notifiers.telegram.TelegramBotNotifierService;
+import com.blablaprincess.springboot_simplejava.business.notifiers.telegram.profiler.messagebuilder.SignTelegramProfilerAspectMessageBuilder;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.aspectj.lang.ProceedingJoinPoint;
@@ -20,7 +22,7 @@ public class SignTelegramProfilerAspect {
     private final TelegramBotNotifierService telegramBotNotifierService;
     private final SignTelegramProfilerAspectMessageBuilder builder;
 
-    @Around("@annotation(com.blablaprincess.springboot_simplejava.business.notifiers.telegram.SignTelegramProfiler)")
+    @Around("@annotation(com.blablaprincess.springboot_simplejava.business.notifiers.telegram.profiler.SignTelegramProfiler)")
     public Object around(ProceedingJoinPoint joinPoint) throws Throwable {
         StopWatch clock = new StopWatch();
         Throwable throwable = null;
