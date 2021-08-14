@@ -22,9 +22,10 @@ class TelegramBotNotifierServiceTests {
     @SuppressWarnings("Convert2Lambda")
     void sendNotification() {
         // Arrange
+        String messageHttpRequestTemplate = "https://tg.org/text={message}";
         String message = "123abc\n!@#$%^&*()-+=\n\uD83D\uDC35\uD83D\uDE48\uD83D\uDE49️";
         URI expectedUri = UriComponentsBuilder
-                .fromHttpUrl("https://api.telegram.org/bottoken/sendMessage?chat_id=chatId&text={message}")
+                .fromHttpUrl(messageHttpRequestTemplate)
                 .buildAndExpand(message)
                 .toUri();
 
@@ -41,7 +42,7 @@ class TelegramBotNotifierServiceTests {
                 .exchangeFunction(spyExchangeFunction)
                 .build();
 
-        TelegramBotNotifierService service = new TelegramBotNotifierService("token", "chatId", webClient);
+        TelegramBotNotifierService service = new TelegramBotNotifierService(messageHttpRequestTemplate, webClient);
 
         // Act + Assert
         service.sendNotification(message);

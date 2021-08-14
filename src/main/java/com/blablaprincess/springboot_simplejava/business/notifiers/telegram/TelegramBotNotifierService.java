@@ -1,7 +1,7 @@
 package com.blablaprincess.springboot_simplejava.business.notifiers.telegram;
 
 import com.blablaprincess.springboot_simplejava.business.notifiers.Notifier;
-import com.fasterxml.jackson.databind.JsonNode;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
@@ -12,22 +12,16 @@ import java.net.URI;
 
 @Slf4j
 @Service
+@RequiredArgsConstructor
 public class TelegramBotNotifierService implements Notifier {
 
-    private final String sendMessageTemplate;
-
+    @Value("https://api.telegram.org/bot${telegram-bot.http-token}/sendMessage?chat_id=${telegram-bot.chat-id}&text={message}")
+    private final String messageHttpRequestTemplate;
     private final WebClient client;
-
-    public TelegramBotNotifierService(@Value("${telegram-bot.http-token}") String httpToken,
-                                      @Value("${telegram-bot.chat-id}") String chatId,
-                                      WebClient client) {
-        this.client = client;
-        sendMessageTemplate = String.format("https://api.telegram.org/bot%s/sendMessage?chat_id=%s&text={message}", httpToken, chatId);
-    }
 
     @Override
     public void sendNotification(String message) {
-        URI uri = UriComponentsBuilder.fromHttpUrl(sendMessageTemplate)
+        URI uri = UriComponentsBuilder.fromHttpUrl(messageHttpRequestTemplate)
                                       .buildAndExpand(message)
                                       .toUri();
 
