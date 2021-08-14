@@ -7,13 +7,12 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.RequiredArgsConstructor;
 import lombok.SneakyThrows;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
-import org.springframework.http.HttpStatus;
-import org.springframework.stereotype.Service;
+import org.springframework.stereotype.Component;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-@Service
+@Component
 @RequiredArgsConstructor
 @ConditionalOnProperty(name = "telegram-bot.adp.enabled", havingValue = "true")
 public class TelegramBotNotifierAfterDispatchingProcessor implements AfterDispatchingProcessor {
