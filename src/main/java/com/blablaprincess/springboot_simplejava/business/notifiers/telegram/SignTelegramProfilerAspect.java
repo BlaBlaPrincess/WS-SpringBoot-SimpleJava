@@ -3,6 +3,7 @@ package com.blablaprincess.springboot_simplejava.business.notifiers.telegram;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.aspectj.lang.ProceedingJoinPoint;
+import org.aspectj.lang.Signature;
 import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
@@ -17,6 +18,7 @@ import org.springframework.util.StopWatch;
 public class SignTelegramProfilerAspect {
 
     private final TelegramBotNotifierService telegramBotNotifierService;
+    private final SignTelegramProfilerAspectMessageBuilder builder;
 
     @Around("@annotation(com.blablaprincess.springboot_simplejava.business.notifiers.telegram.SignTelegramProfiler)")
     public Object around(ProceedingJoinPoint joinPoint) throws Throwable {
@@ -33,16 +35,14 @@ public class SignTelegramProfilerAspect {
             }
         } finally {
             clock.stop();
-            String message = "App has handled the method:\n" +
-                    joinPoint.getSignature().toString() + "\n\n" +
-                    "▫️ Successful: ";
+            String message;
+            Signature signature = joinPoint.getSignature();
+            double performance = clock.getTotalTimeSeconds();
             if (throwable == null) {
-                message += "yes \uD83D\uDFE2\n";
+                message = builder.build(signature, performance);
             } else {
-                message += "no \uD83D\uDD34\n" +
-                        "▫️ Cause:" + throwable + "\n";
+                message = builder.build(signature, performance, throwable);
             }
-            message += "▫️ By: " + clock.getTotalTimeSeconds() + " sec";
             telegramBotNotifierService.sendNotification(message);
         }
     }
