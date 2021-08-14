@@ -1,5 +1,6 @@
 package com.blablaprincess.springboot_simplejava.business.common.persistence;
 
+import lombok.Data;
 import org.hibernate.Hibernate;
 
 import javax.persistence.GeneratedValue;
@@ -8,6 +9,7 @@ import javax.persistence.MappedSuperclass;
 import java.util.Objects;
 import java.util.UUID;
 
+@Data
 @MappedSuperclass
 public class UuidEntity {
 
@@ -21,7 +23,7 @@ public class UuidEntity {
             return true;
         } else if (obj != null && Hibernate.getClass(this) == Hibernate.getClass(obj)) {
             UuidEntity that = (UuidEntity) obj;
-            return Objects.equals(this.id, that.id);
+            return Objects.equals(this.id, that.getId());
         } else {
             return false;
         }

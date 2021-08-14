@@ -7,7 +7,7 @@ import org.junit.jupiter.params.provider.MethodSource;
 
 import java.util.stream.Stream;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.params.provider.Arguments.arguments;
 
 class StringUtilsTests {
@@ -28,10 +28,12 @@ class StringUtilsTests {
     private static Stream<Arguments> getCropByMaxLengthCases() {
 
         return Stream.of(
-                arguments("0123456789",   9,  "0123…6789"),
-                arguments("0123456789",  10, "0123456789"),
-                arguments("0123456789A", 10, "0123…6789A"),
-                arguments("0123456789",  11, "0123456789")
+                arguments("123456", 7, "123456"), // input < maxLength
+                arguments("1234567", 7, "1234567"), // input == maxLength
+                arguments("12345678", 7, "123…678"), // input (even) > maxLength (odd)
+                arguments("123456789", 7, "123…789"), // input (odd) > maxLength (odd)
+                arguments("123456789", 8, "123…6789"), // input (odd) > maxLength (even)
+                arguments("1234567890", 8, "123…7890") // input (even) > maxLength (even)
         );
     }
 
