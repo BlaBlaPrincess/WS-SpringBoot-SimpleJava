@@ -1,5 +1,7 @@
-package com.blablaprincess.springboot_simplejava.business.notifiers.telegram;
+package com.blablaprincess.springboot_simplejava.business.notifiers.telegram.adp;
 
+import com.blablaprincess.springboot_simplejava.business.notifiers.telegram.TelegramBotNotifierService;
+import com.blablaprincess.springboot_simplejava.business.notifiers.telegram.adp.TelegramBotNotifierAfterDispatchingProcessor;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.Test;
 
