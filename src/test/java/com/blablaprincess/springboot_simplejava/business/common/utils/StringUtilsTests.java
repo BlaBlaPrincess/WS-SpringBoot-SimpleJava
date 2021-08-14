@@ -28,12 +28,12 @@ class StringUtilsTests {
     private static Stream<Arguments> getCropByMaxLengthCases() {
 
         return Stream.of(
-                arguments("123456", 7, "123456"),
-                arguments("1234567", 7, "1234567"),
-                arguments("12345678", 7, "123…678"),
-                arguments("123456789", 7, "123…789"),
-                arguments("123456789", 8, "123…6789"),
-                arguments("1234567890", 8, "123…7890")
+                arguments("123456", 7, "123456"), // input < maxLength
+                arguments("1234567", 7, "1234567"), // input == maxLength
+                arguments("12345678", 7, "123…678"), // input (even) > maxLength (odd)
+                arguments("123456789", 7, "123…789"), // input (odd) > maxLength (odd)
+                arguments("123456789", 8, "123…6789"), // input (odd) > maxLength (even)
+                arguments("1234567890", 8, "123…7890") // input (even) > maxLength (even)
         );
     }
 
