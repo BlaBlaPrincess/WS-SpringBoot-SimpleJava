@@ -1,0 +1,5 @@
+controller_call_description_entity:
+  - id: 10000000-1000-1000-9000-900000000000
+    mapping: mapping
+    response: response
+    timestamp: '2010-01-01 00:00:00'
