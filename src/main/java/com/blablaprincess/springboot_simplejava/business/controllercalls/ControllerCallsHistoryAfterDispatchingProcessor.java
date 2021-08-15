@@ -6,8 +6,8 @@ import org.springframework.stereotype.Component;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.time.Instant;
 import java.time.LocalDateTime;
-import java.time.OffsetDateTime;
 import java.time.ZoneOffset;
 
 @Component
@@ -18,7 +18,7 @@ public class ControllerCallsHistoryAfterDispatchingProcessor implements AfterDis
 
     @Override
     public void process(String responseBody, HttpServletRequest request, HttpServletResponse response) {
-        LocalDateTime timestamp = LocalDateTime.ofInstant(OffsetDateTime.now().toInstant(), ZoneOffset.UTC);
+        LocalDateTime timestamp = LocalDateTime.ofInstant(Instant.now(), ZoneOffset.UTC);
         controllerCallsHistoryService.saveCall(ControllerCallDescriptionEntity.builder()
                                                                               .response(responseBody)
                                                                               .mapping(request.getRequestURI())
