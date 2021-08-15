@@ -5,7 +5,6 @@ import com.blablaprincess.springboot_simplejava.business.arraycounting.presenter
 import com.blablaprincess.springboot_simplejava.business.common.digitsrepresentation.DigitsRepresentation;
 import com.blablaprincess.springboot_simplejava.business.validation.ValidatorsCollection;
 import lombok.RequiredArgsConstructor;
-import lombok.var;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -21,7 +20,7 @@ public class IntegersCountingAlgorithmsPresenterAction {
 
     public ArrayCountingAlgorithmsPresenterDto getAlgorithmsCounts(int integer) {
         validators.validate(integer);
-        var array = DigitsRepresentation.getDigitsArray(integer);
+        Integer[] array = DigitsRepresentation.getDigitsArray(integer);
         return integersCountingAlgorithmsPresenterService.getAlgorithmsCounts(array);
     }
 

@@ -8,7 +8,6 @@ import com.blablaprincess.springboot_simplejava.rest.actions.IntegersCountingAlg
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import lombok.RequiredArgsConstructor;
-import lombok.var;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.view.RedirectView;
@@ -43,7 +42,7 @@ public class CountsController {
     @Operation(summary = "redirects counts/integer/** to counts/int/**")
     public RedirectView redirectCountsForIntegerToInt(
             @Parameter(hidden = true) HttpServletRequest request) {
-        var relativeUri = request.getRequestURI().replace("/counts/integer", "");
+        String relativeUri = request.getRequestURI().replace("/counts/integer", "");
         return new RedirectView("/counts/int" + relativeUri);
     }
 
