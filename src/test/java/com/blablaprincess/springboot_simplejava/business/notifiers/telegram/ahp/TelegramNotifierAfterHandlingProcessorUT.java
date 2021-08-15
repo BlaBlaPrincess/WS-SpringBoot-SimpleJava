@@ -7,7 +7,7 @@ import org.junit.jupiter.api.Test;
 
 import static org.mockito.Mockito.*;
 
-class TelegramNotifierAfterHandlingProcessorTests {
+class TelegramNotifierAfterHandlingProcessorUT {
 
     private final TelegramBotNotifierService service = mock(TelegramBotNotifierService.class);
     private final TelegramBotNotifierAfterHandlingProcessorMessageBuilder messageBuilder =

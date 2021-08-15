@@ -16,7 +16,7 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.Mockito.*;
 
 @Execution(ExecutionMode.SAME_THREAD)
-class ProcessAfterHandlingAspectTests {
+class ProcessAfterHandlingAspectUT {
 
     private final ApplicationContext context = mock(ApplicationContext.class);
     private final ProcessAfterHandlingAspect aspect = new ProcessAfterHandlingAspect(context);

@@ -1,10 +1,10 @@
 package com.blablaprincess.springboot_simplejava.rest.controllers;
 
-import com.blablaprincess.springboot_simplejava.business.controllercalls.ControllerCallsHistoryAfterDispatchingProcessor;
-import com.blablaprincess.springboot_simplejava.rest.afterdispatchingprocessor.ProcessAfterDispatchingWith;
+import com.blablaprincess.springboot_simplejava.business.afterhandlingprocessor.ProcessAfterHandlingWith;
 import com.blablaprincess.springboot_simplejava.business.arraycounting.presenters.ArrayCountingAlgorithmsPresenterDto;
+import com.blablaprincess.springboot_simplejava.business.methodcalls.MethodCallsHistoryAfterHandlingProcessor;
+import com.blablaprincess.springboot_simplejava.business.notifiers.telegram.ahp.TelegramBotNotifierAfterHandlingProcessor;
 import com.blablaprincess.springboot_simplejava.rest.actions.IntegersCountingAlgorithmsPresenterAction;
-import com.blablaprincess.springboot_simplejava.business.notifiers.telegram.TelegramBotNotifierAfterDispatchingProcessor;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import lombok.RequiredArgsConstructor;
@@ -18,9 +18,9 @@ import javax.servlet.http.HttpServletRequest;
 @RestController
 @RequestMapping("/counts")
 @RequiredArgsConstructor
-@ProcessAfterDispatchingWith({
-        ControllerCallsHistoryAfterDispatchingProcessor.class,
-        TelegramBotNotifierAfterDispatchingProcessor.class
+@ProcessAfterHandlingWith({
+        MethodCallsHistoryAfterHandlingProcessor.class,
+        TelegramBotNotifierAfterHandlingProcessor.class
 })
 public class CountsController {
 

@@ -1,7 +1,5 @@
 package com.blablaprincess.springboot_simplejava.rest.controllers;
 
-import com.blablaprincess.springboot_simplejava.business.controllercalls.ControllerCallsHistoryAfterDispatchingProcessor;
-import com.blablaprincess.springboot_simplejava.business.notifiers.telegram.TelegramBotNotifierAfterDispatchingProcessor;
 import com.blablaprincess.springboot_simplejava.rest.actions.IntegersCountingAlgorithmsPresenterAction;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -18,8 +16,6 @@ import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 
 import java.util.stream.Stream;
 
-import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.redirectedUrl;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
@@ -34,12 +30,6 @@ class CountControllerMvcIT {
     @MockBean
     private IntegersCountingAlgorithmsPresenterAction integersCountingAlgorithmsPresenterAction;
 
-    @MockBean
-    private TelegramBotNotifierAfterDispatchingProcessor telegramBotNotifierAfterDispatchingProcessor;
-
-    @MockBean
-    private ControllerCallsHistoryAfterDispatchingProcessor controllerCallsHistoryAfterDispatchingProcessor;
-
     @DisplayName("GET /counts/int")
     @Test
     void getAlgorithms() throws Exception {
@@ -53,9 +43,6 @@ class CountControllerMvcIT {
                 .andExpect(status().isOk());
 
         verify(integersCountingAlgorithmsPresenterAction).getAlgorithms();
-
-        verify(telegramBotNotifierAfterDispatchingProcessor).process(any(), any(), any());
-        verify(controllerCallsHistoryAfterDispatchingProcessor).process(any(), any(), any());
     }
 
     @DisplayName("GET algorithms counts")
@@ -72,9 +59,6 @@ class CountControllerMvcIT {
                 .andExpect(status().isOk());
 
         verify(integersCountingAlgorithmsPresenterAction).getAlgorithmsCounts(param);
-
-        verify(telegramBotNotifierAfterDispatchingProcessor).process(any(), any(), any());
-        verify(controllerCallsHistoryAfterDispatchingProcessor).process(any(), any(), any());
     }
 
     private static Stream<Integer> getAlgorithmsCountsCases() {
@@ -94,9 +78,6 @@ class CountControllerMvcIT {
                 // Assert
                 .andExpect(status().isPermanentRedirect())
                 .andExpect(redirectedUrl(to));
-
-        verify(telegramBotNotifierAfterDispatchingProcessor).process(any(), any(), any());
-        verify(controllerCallsHistoryAfterDispatchingProcessor).process(any(), any(), any());
     }
 
     private static Stream<String> redirectCountsForIntegerToIntCases() {

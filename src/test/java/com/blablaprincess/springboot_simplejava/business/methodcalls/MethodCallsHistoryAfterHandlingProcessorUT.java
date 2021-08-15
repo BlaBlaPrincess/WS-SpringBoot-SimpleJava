@@ -6,7 +6,7 @@ import org.junit.jupiter.api.Test;
 
 import static org.mockito.Mockito.*;
 
-class MethodCallsHistoryAfterHandlingProcessorTests {
+class MethodCallsHistoryAfterHandlingProcessorUT {
 
     private final MethodCallsHistory service = mock(MethodCallsHistory.class);
     private final ObjectMapper mapper = mock(ObjectMapper.class);
