@@ -40,6 +40,65 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 })
 class ProcessAfterDispatchingStarterFilterMvcIT {
 
+    @Autowired
+    private MockMvc mvc;
+
+    @MockBean
+    private TestConfig.Worker worker;
+
+    @MockBean
+    private AfterDispatchingProcessor afterDispatchingProcessor;
+
+    @DisplayName("test when controller does not throw")
+    @ParameterizedTest(name = "{0}")
+    @MethodSource("getTestCases")
+    void testWhenControllerDoesNotThrow(String uri, int wantedNumberOfAfterDispatchingProcessorInvocations) throws Exception {
+        // Arrange
+        String response = "Some response message";
+        Mockito.when(worker.doWork()).thenReturn(response);
+
+        // Act
+        mvc.perform(MockMvcRequestBuilders.get(BASE_DO_STUFF_URI + uri))
+           // Assert
+           .andExpect(status().isOk());
+
+        verify(worker, times(1)).doWork();
+        verify(afterDispatchingProcessor, times(wantedNumberOfAfterDispatchingProcessorInvocations)).process(any(), any(), any());
+        verify(afterDispatchingProcessor, times(wantedNumberOfAfterDispatchingProcessorInvocations)).process(eq(response), any(), any());
+    }
+
+    @DisplayName("test when controller do throw")
+    @ParameterizedTest(name = "{0}")
+    @MethodSource("getTestCases")
+    void testWhenControllerDoThrow(String uri, int wantedNumberOfAfterDispatchingProcessorInvocations) throws Exception {
+        // Arrange
+        String message = "Some exception message";
+        doThrow(new RuntimeException(message)).when(worker).doWork();
+
+        // Act
+        mvc.perform(MockMvcRequestBuilders.get(BASE_DO_STUFF_URI + uri))
+           // Assert
+           .andExpect(status().is(EXCEPTION_STATUS_CODE));
+
+        verify(worker, times(1)).doWork();
+        verify(afterDispatchingProcessor, times(wantedNumberOfAfterDispatchingProcessorInvocations)).process(any(), any(), any());
+        verify(afterDispatchingProcessor, times(wantedNumberOfAfterDispatchingProcessorInvocations)).process(eq(message), any(), any());
+    }
+
+    private static Stream<Arguments> getTestCases() {
+        return Stream.of(
+                arguments(TestConfig.TestController.DO_STAFF_URI, 0),
+                arguments(TestConfig.TestController.DO_STAFF_AND_PROCESS_URI, 1),
+                arguments(TestConfig.TestController.DO_STAFF_AND_PROCESS_TWICE_URI, 2),
+                arguments(TestConfig.AnnotatedTestController.DO_STAFF_URI, 1),
+                arguments(TestConfig.AnnotatedTestController.DO_STAFF_AND_PROCESS_URI, 1),
+                arguments(TestConfig.AnnotatedTestController.DO_STAFF_AND_PROCESS_TWICE_URI, 2),
+                arguments(TestConfig.AnnotatedTwiceTestController.DO_STAFF_URI, 2),
+                arguments(TestConfig.AnnotatedTwiceTestController.DO_STAFF_AND_PROCESS_URI, 1),
+                arguments(TestConfig.AnnotatedTwiceTestController.DO_STAFF_AND_PROCESS_TWICE_URI, 2)
+        );
+    }
+
     @TestConfiguration
     public static class TestConfig {
 
@@ -160,65 +219,6 @@ class ProcessAfterDispatchingStarterFilterMvcIT {
                 return new ResponseEntity<>(exception.getMessage(), null, EXCEPTION_STATUS_CODE);
             }
         }
-    }
-
-    @Autowired
-    private MockMvc mvc;
-
-    @MockBean
-    private TestConfig.Worker worker;
-
-    @MockBean
-    private AfterDispatchingProcessor afterDispatchingProcessor;
-
-    @DisplayName("test when controller does not throw")
-    @ParameterizedTest(name = "{0}")
-    @MethodSource("getTestCases")
-    void testWhenControllerDoesNotThrow(String uri, int wantedNumberOfAfterDispatchingProcessorInvocations) throws Exception {
-        // Arrange
-        String response = "Some response message";
-        Mockito.when(worker.doWork()).thenReturn(response);
-
-        // Act
-        mvc.perform(MockMvcRequestBuilders.get(BASE_DO_STUFF_URI + uri))
-           // Assert
-           .andExpect(status().isOk());
-
-        verify(worker, times(1)).doWork();
-        verify(afterDispatchingProcessor, times(wantedNumberOfAfterDispatchingProcessorInvocations)).process(any(), any(), any());
-        verify(afterDispatchingProcessor, times(wantedNumberOfAfterDispatchingProcessorInvocations)).process(eq(response), any(), any());
-    }
-
-    @DisplayName("test when controller do throw")
-    @ParameterizedTest(name = "{0}")
-    @MethodSource("getTestCases")
-    void testWhenControllerDoThrow(String uri, int wantedNumberOfAfterDispatchingProcessorInvocations) throws Exception {
-        // Arrange
-        String message = "Some exception message";
-        doThrow(new RuntimeException(message)).when(worker).doWork();
-
-        // Act
-        mvc.perform(MockMvcRequestBuilders.get(BASE_DO_STUFF_URI + uri))
-           // Assert
-           .andExpect(status().is(EXCEPTION_STATUS_CODE));
-
-        verify(worker, times(1)).doWork();
-        verify(afterDispatchingProcessor, times(wantedNumberOfAfterDispatchingProcessorInvocations)).process(any(), any(), any());
-        verify(afterDispatchingProcessor, times(wantedNumberOfAfterDispatchingProcessorInvocations)).process(eq(message), any(), any());
-    }
-
-    private static Stream<Arguments> getTestCases() {
-        return Stream.of(
-                arguments(TestConfig.TestController.DO_STAFF_URI, 0),
-                arguments(TestConfig.TestController.DO_STAFF_AND_PROCESS_URI, 1),
-                arguments(TestConfig.TestController.DO_STAFF_AND_PROCESS_TWICE_URI, 2),
-                arguments(TestConfig.AnnotatedTestController.DO_STAFF_URI, 1),
-                arguments(TestConfig.AnnotatedTestController.DO_STAFF_AND_PROCESS_URI, 1),
-                arguments(TestConfig.AnnotatedTestController.DO_STAFF_AND_PROCESS_TWICE_URI, 2),
-                arguments(TestConfig.AnnotatedTwiceTestController.DO_STAFF_URI, 2),
-                arguments(TestConfig.AnnotatedTwiceTestController.DO_STAFF_AND_PROCESS_URI, 1),
-                arguments(TestConfig.AnnotatedTwiceTestController.DO_STAFF_AND_PROCESS_TWICE_URI, 2)
-        );
     }
 
 }
