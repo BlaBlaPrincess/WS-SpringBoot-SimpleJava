@@ -16,7 +16,7 @@ import org.springframework.util.StopWatch;
 @Aspect
 @Component
 @RequiredArgsConstructor
-@ConditionalOnProperty(name = "telegram-bot.aspect.enabled", havingValue = "true")
+@ConditionalOnProperty(name = "telegram-bot.profiler.enabled", havingValue = "true")
 public class SignTelegramProfilerAspect {
 
     private final TelegramBotNotifierService telegramBotNotifierService;
