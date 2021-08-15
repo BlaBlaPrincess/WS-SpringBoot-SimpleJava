@@ -1,6 +1,9 @@
 package com.blablaprincess.springboot_simplejava.business.common.persistence;
 
+import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
+import lombok.experimental.SuperBuilder;
 import org.hibernate.Hibernate;
 
 import javax.persistence.GeneratedValue;
@@ -10,7 +13,9 @@ import java.util.Objects;
 import java.util.UUID;
 
 @Data
+@SuperBuilder
 @MappedSuperclass
+@NoArgsConstructor
 public class UuidEntity {
 
     @Id
@@ -23,7 +28,7 @@ public class UuidEntity {
             return true;
         } else if (obj != null && Hibernate.getClass(this) == Hibernate.getClass(obj)) {
             UuidEntity that = (UuidEntity) obj;
-            return Objects.equals(this.id, that.getId());
+            return Objects.equals(this.getId(), that.getId());
         } else {
             return false;
         }
@@ -31,7 +36,7 @@ public class UuidEntity {
 
     @Override
     public int hashCode() {
-        return Objects.hash(this.id);
+        return Objects.hash(this.getId());
     }
 
 }

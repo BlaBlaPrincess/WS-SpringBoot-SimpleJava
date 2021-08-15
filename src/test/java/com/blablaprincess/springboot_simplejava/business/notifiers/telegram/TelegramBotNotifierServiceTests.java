@@ -1,52 +1,55 @@
 package com.blablaprincess.springboot_simplejava.business.notifiers.telegram;
 
+import okhttp3.HttpUrl;
+import okhttp3.mockwebserver.MockResponse;
+import okhttp3.mockwebserver.MockWebServer;
+import okhttp3.mockwebserver.RecordedRequest;
+import org.junit.jupiter.api.AfterAll;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.springframework.http.HttpStatus;
-import org.springframework.web.reactive.function.client.ClientRequest;
-import org.springframework.web.reactive.function.client.ClientResponse;
-import org.springframework.web.reactive.function.client.ExchangeFunction;
 import org.springframework.web.reactive.function.client.WebClient;
-import org.springframework.web.util.UriComponentsBuilder;
-import reactor.core.publisher.Mono;
 
-import java.net.URI;
+import java.io.IOException;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.Mockito.spy;
-import static org.mockito.Mockito.verify;
 
 class TelegramBotNotifierServiceTests {
 
+    private TelegramBotNotifierService telegramBotNotifierService;
+    private static MockWebServer webServer;
+
+    @BeforeAll
+    static void setup() throws IOException {
+        webServer = new MockWebServer();
+        webServer.start();
+    }
+
+    @BeforeEach
+    void init() {
+        String baseUrl = String.format("http://localhost:%s?text=", webServer.getPort());
+        telegramBotNotifierService = new TelegramBotNotifierService(baseUrl, WebClient.create(baseUrl));
+    }
+
+    @AfterAll
+    static void tearDown() throws IOException {
+        webServer.shutdown();
+    }
+
     @Test
-    @SuppressWarnings("Convert2Lambda")
-    void sendNotification() {
+    void sendNotification() throws InterruptedException {
         // Arrange
-        String messageHttpRequestTemplate = "https://tg.org/text={message}";
         String message = "123abc\n!@#$%^&*()-+=\n\uD83D\uDC35\uD83D\uDE48\uD83D\uDE49️";
-        URI expectedUri = UriComponentsBuilder
-                .fromHttpUrl(messageHttpRequestTemplate)
-                .buildAndExpand(message)
-                .toUri();
+        webServer.enqueue(new MockResponse().setResponseCode(200));
 
-        ExchangeFunction exchangeFunction = new ExchangeFunction() {
-            public Mono<ClientResponse> exchange(ClientRequest request) {
-                URI actualUri = request.url();
-                assertEquals(expectedUri, actualUri);
-                return Mono.just(ClientResponse.create(HttpStatus.OK).build());
-            }
-        };
-        ExchangeFunction spyExchangeFunction = spy(exchangeFunction);
+        // Act
+        telegramBotNotifierService.sendNotification(message);
+        RecordedRequest recordedRequest = webServer.takeRequest();
+        HttpUrl requestUrl = recordedRequest.getRequestUrl();
+        String sent = requestUrl.queryParameter("text");
 
-        WebClient webClient = WebClient.builder()
-                .exchangeFunction(spyExchangeFunction)
-                .build();
-
-        TelegramBotNotifierService service = new TelegramBotNotifierService(messageHttpRequestTemplate, webClient);
-
-        // Act + Assert
-        service.sendNotification(message);
-        verify(spyExchangeFunction).exchange(any());
+        // Assert
+        assertEquals(message, sent);
     }
 
 }

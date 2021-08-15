@@ -15,9 +15,9 @@ class StringUtilsTests {
     private final StringUtils stringUtils = new StringUtils();
 
     @DisplayName("cropByMaxLength()")
-    @ParameterizedTest(name = "{0} input length, {1} max length")
+    @ParameterizedTest(name = "{0}")
     @MethodSource("getCropByMaxLengthCases")
-    void cropByMaxLength(String input, int maxLength, String expected) {
+    void cropByMaxLength(String description, String input, int maxLength, String expected) {
         // Act
         String result = stringUtils.cropByMaxLength(input, maxLength);
 
@@ -28,12 +28,12 @@ class StringUtilsTests {
     private static Stream<Arguments> getCropByMaxLengthCases() {
 
         return Stream.of(
-                arguments("123456", 7, "123456"), // input < maxLength
-                arguments("1234567", 7, "1234567"), // input == maxLength
-                arguments("12345678", 7, "123…678"), // input (even) > maxLength (odd)
-                arguments("123456789", 7, "123…789"), // input (odd) > maxLength (odd)
-                arguments("123456789", 8, "123…6789"), // input (odd) > maxLength (even)
-                arguments("1234567890", 8, "123…7890") // input (even) > maxLength (even)
+                arguments("input < maxLength",               "123456",     7, "123456"),
+                arguments("input == maxLength",              "1234567",    7, "1234567"),
+                arguments("input (even) > maxLength (odd)",  "12345678",   7, "123…678"),
+                arguments("input (odd)  > maxLength (odd)",  "123456789",  7, "123…789"),
+                arguments("input (odd)  > maxLength (even)", "123456789",  8, "123…6789"),
+                arguments("input (even) > maxLength (even)", "1234567890", 8, "123…7890")
         );
     }
 

@@ -57,11 +57,11 @@ class ControllerCallsHistoryControllerSpringPgSqlContainerIT {
         // Arrange
         ControllerCallDescriptionEntity entity =
                 ControllerCallDescriptionEntity.builder()
+                        .id(UUID.fromString("10000000-1000-1000-9000-900000000000"))
                         .mapping("mapping")
                         .response("response")
                         .timestamp(LocalDateTime.parse("2010-01-01T00:00"))
                         .build();
-        entity.setId(UUID.fromString("10000000-1000-1000-9000-900000000000"));
         List<ControllerCallDescriptionEntity> expected = asList(entity);
 
 
