@@ -23,7 +23,7 @@ public class UuidEntity {
             return true;
         } else if (obj != null && Hibernate.getClass(this) == Hibernate.getClass(obj)) {
             UuidEntity that = (UuidEntity) obj;
-            return Objects.equals(this.id, that.getId());
+            return Objects.equals(this.getId(), that.getId());
         } else {
             return false;
         }
@@ -31,7 +31,7 @@ public class UuidEntity {
 
     @Override
     public int hashCode() {
-        return Objects.hash(this.id);
+        return Objects.hash(this.getId());
     }
 
 }
