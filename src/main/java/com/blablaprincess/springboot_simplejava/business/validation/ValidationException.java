@@ -1,6 +1,6 @@
 package com.blablaprincess.springboot_simplejava.business.validation;
 
-import com.blablaprincess.springboot_simplejava.business.BusinessException;
+import com.blablaprincess.springboot_simplejava.business.common.exceptions.BusinessException;
 
 public class ValidationException extends BusinessException {
 

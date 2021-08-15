@@ -2,9 +2,8 @@ package com.blablaprincess.springboot_simplejava.runners;
 
 import com.blablaprincess.springboot_simplejava.business.arraycounting.presenters.ArrayCountingAlgorithmsPresenter;
 import com.blablaprincess.springboot_simplejava.business.arraycounting.presenters.ArrayCountingAlgorithmsPresenterDtoFormatter;
-import com.blablaprincess.springboot_simplejava.business.digitsrepresentation.DigitsRepresentation;
+import com.blablaprincess.springboot_simplejava.business.common.digitsrepresentation.DigitsRepresentation;
 import lombok.RequiredArgsConstructor;
-import lombok.var;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.context.annotation.Profile;
@@ -24,14 +23,14 @@ public class CommandLineRunnerImpl implements CommandLineRunner {
     @Override
     public void run(String... args) throws Exception {
         System.out.printf("%nType not a int for out of cycle.%n");
-        try (var scanner = new Scanner(System.in)) {
+        try (Scanner scanner = new Scanner(System.in)) {
             int number;
             //noinspection InfiniteLoopStatement
             while (true) {
                 System.out.printf("%nNumber: ");
                 number = scanner.nextInt();
 
-                var array = DigitsRepresentation.getDigitsArray(number);
+                Integer[] array = DigitsRepresentation.getDigitsArray(number);
                 System.out.println(formatter.format(presenter.getAlgorithmsCounts(array)));
             }
         } catch (Exception e) {

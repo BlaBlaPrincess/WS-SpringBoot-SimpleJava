@@ -2,7 +2,7 @@ package com.blablaprincess.springboot_simplejava.business.notifiers.telegram.ahp
 
 import com.blablaprincess.springboot_simplejava.business.notifiers.telegram.TelegramBotNotifierService;
 import com.blablaprincess.springboot_simplejava.business.notifiers.telegram.ahp.messagebuilder.TelegramBotNotifierAfterHandlingProcessorMessageBuilder;
-import com.blablaprincess.springboot_simplejava.business.afterhandlingprocessor.AfterHandlingProcessor;
+import com.blablaprincess.springboot_simplejava.business.common.afterhandlingprocessor.AfterHandlingProcessor;
 import lombok.RequiredArgsConstructor;
 import org.aspectj.lang.Signature;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;

@@ -16,14 +16,13 @@ import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 
 import java.util.stream.Stream;
 
-import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.redirectedUrl;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @Execution(ExecutionMode.SAME_THREAD)
 @WebMvcTest(CountsController.class)
-public class CountControllerMvcIT {
+class CountControllerMvcIT {
 
     @Autowired
     private MockMvc mvc;
@@ -31,7 +30,7 @@ public class CountControllerMvcIT {
     @MockBean
     private IntegersCountingAlgorithmsPresenterAction integersCountingAlgorithmsPresenterAction;
 
-    @DisplayName("GET algorithms")
+    @DisplayName("GET /counts/int")
     @Test
     void getAlgorithms() throws Exception {
         // Arrange
@@ -43,7 +42,7 @@ public class CountControllerMvcIT {
                 // Assert
                 .andExpect(status().isOk());
 
-        verify(integersCountingAlgorithmsPresenterAction, times(1)).getAlgorithms();
+        verify(integersCountingAlgorithmsPresenterAction).getAlgorithms();
     }
 
     @DisplayName("GET algorithms counts")
@@ -59,7 +58,7 @@ public class CountControllerMvcIT {
                 // Assert
                 .andExpect(status().isOk());
 
-        verify(integersCountingAlgorithmsPresenterAction, times(1)).getAlgorithmsCounts(param);
+        verify(integersCountingAlgorithmsPresenterAction).getAlgorithmsCounts(param);
     }
 
     private static Stream<Integer> getAlgorithmsCountsCases() {
