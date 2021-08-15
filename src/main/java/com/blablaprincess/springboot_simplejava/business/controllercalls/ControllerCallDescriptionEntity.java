@@ -2,6 +2,7 @@ package com.blablaprincess.springboot_simplejava.business.controllercalls;
 
 import com.blablaprincess.springboot_simplejava.business.common.persistence.UuidEntity;
 import lombok.*;
+import lombok.experimental.SuperBuilder;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -10,9 +11,8 @@ import java.time.LocalDateTime;
 
 @Data
 @Entity
-@Builder
+@SuperBuilder
 @NoArgsConstructor
-@AllArgsConstructor
 @EqualsAndHashCode(callSuper = true)
 public class ControllerCallDescriptionEntity extends UuidEntity {
 

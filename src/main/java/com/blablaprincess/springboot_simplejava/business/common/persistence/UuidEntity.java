@@ -1,6 +1,9 @@
 package com.blablaprincess.springboot_simplejava.business.common.persistence;
 
+import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
+import lombok.experimental.SuperBuilder;
 import org.hibernate.Hibernate;
 
 import javax.persistence.GeneratedValue;
@@ -10,7 +13,9 @@ import java.util.Objects;
 import java.util.UUID;
 
 @Data
+@SuperBuilder
 @MappedSuperclass
+@NoArgsConstructor
 public class UuidEntity {
 
     @Id
