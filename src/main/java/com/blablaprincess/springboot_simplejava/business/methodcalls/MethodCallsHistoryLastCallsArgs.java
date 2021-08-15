@@ -1,4 +1,4 @@
-package com.blablaprincess.springboot_simplejava.business.controllercalls;
+package com.blablaprincess.springboot_simplejava.business.methodcalls;
 
 import com.blablaprincess.springboot_simplejava.business.common.datetime.DateTimeFormats;
 import lombok.AllArgsConstructor;
@@ -13,7 +13,7 @@ import java.time.LocalDateTime;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class ControllerCallsHistoryLastCallsArgs {
+public class MethodCallsHistoryLastCallsArgs {
 
     @DateTimeFormat(pattern = DateTimeFormats.YEAR_TO_MINUTE)
     private LocalDateTime timestampAfter;

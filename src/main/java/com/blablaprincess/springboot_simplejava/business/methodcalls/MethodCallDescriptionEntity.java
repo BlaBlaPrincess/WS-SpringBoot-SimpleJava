@@ -1,7 +1,9 @@
-package com.blablaprincess.springboot_simplejava.business.controllercalls;
+package com.blablaprincess.springboot_simplejava.business.methodcalls;
 
 import com.blablaprincess.springboot_simplejava.business.common.persistence.UuidEntity;
-import lombok.*;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.NoArgsConstructor;
 import lombok.experimental.SuperBuilder;
 
 import javax.persistence.Column;
@@ -14,12 +16,20 @@ import java.time.LocalDateTime;
 @SuperBuilder
 @NoArgsConstructor
 @EqualsAndHashCode(callSuper = true)
-public class ControllerCallDescriptionEntity extends UuidEntity {
+public class MethodCallDescriptionEntity extends UuidEntity {
+
+    @Transient
+    public static final int MAX_ARGS_LENGTH = 512;
 
     @Transient
     public static final int MAX_RESPONSE_LENGTH = 255;
 
-    private String mapping;
+    private String method;
+
+    @Column(length = MAX_ARGS_LENGTH)
+    private String args;
+
+    private boolean successful;
 
     @Column(length = MAX_RESPONSE_LENGTH)
     private String response;

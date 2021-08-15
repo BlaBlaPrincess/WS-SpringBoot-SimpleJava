@@ -1,6 +1,6 @@
 package com.blablaprincess.springboot_simplejava.rest.controllers;
 
-import com.blablaprincess.springboot_simplejava.business.controllercalls.ControllerCallDescriptionEntity;
+import com.blablaprincess.springboot_simplejava.business.methodcalls.MethodCallDescriptionEntity;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.github.database.rider.core.api.configuration.DBUnit;
@@ -41,7 +41,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @DBUnit(cacheConnection = false, leakHunter = true, caseInsensitiveStrategy = LOWERCASE)
 @RequiredArgsConstructor
 @SuppressWarnings("ArraysAsListWithZeroOrOneArgument")
-class ControllerCallsHistoryControllerSpringPgSqlContainerIT {
+class MethodCallsHistoryMethodSpringPgSqlContainerIT {
 
     @Autowired
     private MockMvc mvc;
@@ -55,14 +55,16 @@ class ControllerCallsHistoryControllerSpringPgSqlContainerIT {
     @DataSet(TdsSource + "GetControllerCallDescriptionEntityTDS.yml")
     void getControllerCallDescriptionEntity() throws Exception {
         // Arrange
-        ControllerCallDescriptionEntity entity =
-                ControllerCallDescriptionEntity.builder()
+        MethodCallDescriptionEntity entity =
+                MethodCallDescriptionEntity.builder()
                         .id(UUID.fromString("10000000-1000-1000-9000-900000000000"))
-                        .mapping("mapping")
+                        .method("method_0")
+                        .args("1, 2, 3")
+                        .successful(true)
                         .response("response")
                         .timestamp(LocalDateTime.parse("2010-01-01T00:00"))
                         .build();
-        List<ControllerCallDescriptionEntity> expected = asList(entity);
+        List<MethodCallDescriptionEntity> expected = asList(entity);
 
 
         // Act
@@ -72,8 +74,9 @@ class ControllerCallsHistoryControllerSpringPgSqlContainerIT {
                 .getResponse()
                 .getContentAsString();
 
-        List<ControllerCallDescriptionEntity> response =
-                mapper.readValue(responseBody, new TypeReference<List<ControllerCallDescriptionEntity>>() {});
+        List<MethodCallDescriptionEntity> response =
+                mapper.readValue(responseBody, new TypeReference<List<MethodCallDescriptionEntity>>() {
+                });
 
         // Assert
         assertEquals(expected, response);
@@ -91,11 +94,12 @@ class ControllerCallsHistoryControllerSpringPgSqlContainerIT {
                 .getResponse()
                 .getContentAsString();
 
-        List<ControllerCallDescriptionEntity> response =
-                mapper.readValue(responseBody, new TypeReference<List<ControllerCallDescriptionEntity>>() {});
+        List<MethodCallDescriptionEntity> response =
+                mapper.readValue(responseBody, new TypeReference<List<MethodCallDescriptionEntity>>() {
+                });
 
         List<String> responseValues = response.stream()
-                .map(ControllerCallDescriptionEntity::getResponse)
+                .map(MethodCallDescriptionEntity::getResponse)
                 .collect(Collectors.toList());
 
         // Assert
