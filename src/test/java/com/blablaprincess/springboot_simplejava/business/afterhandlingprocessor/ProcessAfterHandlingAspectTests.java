@@ -34,13 +34,10 @@ class ProcessAfterHandlingAspectTests {
         }
     };
     private final AfterHandlingProcessor spyProcessorBean = spy(processorBean);
+    private final Method method = mock(Method.class);
 
     @BeforeEach
     void setup() {
-        // not a class field because of:
-        // https://github.com/mockito/mockito/issues/2026
-        Method method = mock(Method.class);
-
         when(joinPoint.getArgs()).thenReturn(args);
         when(joinPoint.getSignature()).thenReturn(signature);
         when(signature.getMethod()).thenReturn(method);
