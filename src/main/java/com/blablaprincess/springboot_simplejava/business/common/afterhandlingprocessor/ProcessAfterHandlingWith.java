@@ -1,4 +1,4 @@
-package com.blablaprincess.springboot_simplejava.business.afterhandlingprocessor;
+package com.blablaprincess.springboot_simplejava.business.common.afterhandlingprocessor;
 
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;

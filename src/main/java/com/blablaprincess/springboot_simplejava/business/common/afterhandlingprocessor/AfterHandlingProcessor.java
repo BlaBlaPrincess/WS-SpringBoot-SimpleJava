@@ -1,4 +1,4 @@
-package com.blablaprincess.springboot_simplejava.business.afterhandlingprocessor;
+package com.blablaprincess.springboot_simplejava.business.common.afterhandlingprocessor;
 
 import org.aspectj.lang.Signature;
 

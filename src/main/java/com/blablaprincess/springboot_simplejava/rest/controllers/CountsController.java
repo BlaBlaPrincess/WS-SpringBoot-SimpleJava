@@ -1,6 +1,6 @@
 package com.blablaprincess.springboot_simplejava.rest.controllers;
 
-import com.blablaprincess.springboot_simplejava.business.afterhandlingprocessor.ProcessAfterHandlingWith;
+import com.blablaprincess.springboot_simplejava.business.common.afterhandlingprocessor.ProcessAfterHandlingWith;
 import com.blablaprincess.springboot_simplejava.business.arraycounting.presenters.ArrayCountingAlgorithmsPresenterDto;
 import com.blablaprincess.springboot_simplejava.business.methodcalls.MethodCallsHistoryAfterHandlingProcessor;
 import com.blablaprincess.springboot_simplejava.business.notifiers.telegram.ahp.TelegramBotNotifierAfterHandlingProcessor;

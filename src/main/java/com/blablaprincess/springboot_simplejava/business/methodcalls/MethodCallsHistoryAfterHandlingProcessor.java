@@ -1,6 +1,6 @@
 package com.blablaprincess.springboot_simplejava.business.methodcalls;
 
-import com.blablaprincess.springboot_simplejava.business.afterhandlingprocessor.AfterHandlingProcessor;
+import com.blablaprincess.springboot_simplejava.business.common.afterhandlingprocessor.AfterHandlingProcessor;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.RequiredArgsConstructor;
 import lombok.SneakyThrows;
