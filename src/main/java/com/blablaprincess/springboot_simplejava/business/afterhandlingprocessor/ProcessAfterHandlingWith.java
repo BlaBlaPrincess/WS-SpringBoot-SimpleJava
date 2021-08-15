@@ -1,4 +1,4 @@
-package com.blablaprincess.springboot_simplejava.rest.afterdispatchingprocessor;
+package com.blablaprincess.springboot_simplejava.business.afterhandlingprocessor;
 
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
@@ -8,6 +8,6 @@ import static java.lang.annotation.ElementType.*;
 
 @Target({TYPE, METHOD})
 @Retention(RetentionPolicy.RUNTIME)
-public @interface ProcessAfterDispatchingWith {
-    Class<? extends AfterDispatchingProcessor>[] value();
+public @interface ProcessAfterHandlingWith {
+    Class<? extends AfterHandlingProcessor>[] value();
 }

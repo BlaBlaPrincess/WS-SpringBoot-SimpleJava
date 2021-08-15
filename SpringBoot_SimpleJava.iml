@@ -137,6 +137,8 @@
     <orderEntry type="library" scope="TEST" name="Maven: org.springframework:spring-test:5.3.8" level="project" />
     <orderEntry type="library" scope="TEST" name="Maven: org.xmlunit:xmlunit-core:2.8.2" level="project" />
     <orderEntry type="library" name="Maven: org.projectlombok:lombok:1.18.20" level="project" />
+    <orderEntry type="library" name="Maven: org.aspectj:aspectjrt:1.8.9" level="project" />
+    <orderEntry type="library" name="Maven: org.aspectj:aspectjweaver:1.8.9" level="project" />
     <orderEntry type="library" scope="RUNTIME" name="Maven: org.postgresql:postgresql:42.2.20" level="project" />
     <orderEntry type="library" scope="RUNTIME" name="Maven: org.checkerframework:checker-qual:3.5.0" level="project" />
     <orderEntry type="library" scope="PROVIDED" name="Maven: com.querydsl:querydsl-apt:4.1.4" level="project" />
@@ -176,6 +178,7 @@
     <orderEntry type="library" name="Maven: com.fasterxml:classmate:1.5.1" level="project" />
     <orderEntry type="library" name="Maven: org.springframework.plugin:spring-plugin-core:2.0.0.RELEASE" level="project" />
     <orderEntry type="library" name="Maven: org.springframework.plugin:spring-plugin-metadata:2.0.0.RELEASE" level="project" />
+    <orderEntry type="library" name="Maven: commons-io:commons-io:2.11.0" level="project" />
     <orderEntry type="library" scope="TEST" name="Maven: com.github.database-rider:rider-junit5:1.27.0" level="project" />
     <orderEntry type="library" scope="TEST" name="Maven: com.github.database-rider:rider-core:1.27.0" level="project" />
     <orderEntry type="library" scope="TEST" name="Maven: org.dbunit:dbunit:2.7.0" level="project" />
@@ -202,8 +205,6 @@
     <orderEntry type="library" scope="TEST" name="Maven: org.testcontainers:database-commons:1.15.3" level="project" />
     <orderEntry type="library" scope="TEST" name="Maven: org.testcontainers:junit-jupiter:1.15.3" level="project" />
     <orderEntry type="library" scope="TEST" name="Maven: org.testcontainers:testcontainers:1.15.3" level="project" />
-    <orderEntry type="library" scope="TEST" name="Maven: junit:junit:4.13.2" level="project" />
-    <orderEntry type="library" scope="TEST" name="Maven: org.hamcrest:hamcrest-core:2.2" level="project" />
     <orderEntry type="library" scope="TEST" name="Maven: org.apache.commons:commons-compress:1.20" level="project" />
     <orderEntry type="library" scope="TEST" name="Maven: org.rnorth.duct-tape:duct-tape:1.0.8" level="project" />
     <orderEntry type="library" scope="TEST" name="Maven: org.rnorth.visible-assertions:visible-assertions:2.1.2" level="project" />
@@ -211,6 +212,11 @@
     <orderEntry type="library" scope="TEST" name="Maven: com.github.docker-java:docker-java-api:3.2.8" level="project" />
     <orderEntry type="library" scope="TEST" name="Maven: com.github.docker-java:docker-java-transport-zerodep:3.2.8" level="project" />
     <orderEntry type="library" scope="TEST" name="Maven: com.github.docker-java:docker-java-transport:3.2.8" level="project" />
+    <orderEntry type="library" scope="TEST" name="Maven: com.squareup.okhttp3:mockwebserver:3.14.9" level="project" />
+    <orderEntry type="library" scope="TEST" name="Maven: com.squareup.okhttp3:okhttp:3.14.9" level="project" />
+    <orderEntry type="library" scope="TEST" name="Maven: com.squareup.okio:okio:1.17.2" level="project" />
+    <orderEntry type="library" scope="TEST" name="Maven: junit:junit:4.13.2" level="project" />
+    <orderEntry type="library" scope="TEST" name="Maven: org.hamcrest:hamcrest-core:2.2" level="project" />
     <orderEntry type="library" scope="TEST" name="Maven: org.reflections:reflections:0.9.11" level="project" />
     <orderEntry type="library" name="Maven: com.google.guava:guava:20.0" level="project" />
     <orderEntry type="library" name="Maven: org.javassist:javassist:3.21.0-GA" level="project" />

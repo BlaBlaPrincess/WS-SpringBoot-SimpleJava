@@ -9,7 +9,7 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.blablaprincess</groupId>
-	<artifactId>spring-boot-simple-java</artifactId>
+	<artifactId>SpringBoot_SimpleJava</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>SpringBoot.SimpleJava</name>
 	<description>Simple java project for Spring Boot</description>
@@ -19,15 +19,18 @@
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<maven.compiler.source>1.8</maven.compiler.source>
 		<maven.compiler.target>1.8</maven.compiler.target>
+
 		<querydsl.version>4.1.4</querydsl.version>
-		<aspectj.version>1.8.9</aspectj.version>
-		<apt.maven.plugin.version>1.1.3</apt.maven.plugin.version>
-
+		<commons-io.version>2.11.0</commons-io.version>
 		<springfox.boot.starter.version>3.0.0</springfox.boot.starter.version>
-		<reflections.version>0.9.11</reflections.version>
+		<aspectj.version>1.8.9</aspectj.version>
 
+		<reflections.version>0.9.11</reflections.version>
 		<rider.junit5.version>1.27.0</rider.junit5.version>
 		<testcontainers.version>1.15.3</testcontainers.version>
+		<okhttp3.version>3.14.9</okhttp3.version>
+
+		<apt.maven.plugin.version>1.1.3</apt.maven.plugin.version>
 	</properties>
 	<dependencies>
 		<!-- Spring boot starters -->
@@ -55,6 +58,16 @@
 			<optional>true</optional>
 		</dependency>
 		<dependency>
+			<groupId>org.aspectj</groupId>
+			<artifactId>aspectjrt</artifactId>
+			<version>${aspectj.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.aspectj</groupId>
+			<artifactId>aspectjweaver</artifactId>
+			<version>${aspectj.version}</version>
+		</dependency>
+		<dependency>
 			<groupId>org.postgresql</groupId>
 			<artifactId>postgresql</artifactId>
 			<scope>runtime</scope>
@@ -71,19 +84,14 @@
 			<version>${querydsl.version}</version>
 		</dependency>
 		<dependency>
-			<groupId>org.aspectj</groupId>
-			<artifactId>aspectjrt</artifactId>
-			<version>${aspectj.version}</version>
-		</dependency>
-		<dependency>
-			<groupId>org.aspectj</groupId>
-			<artifactId>aspectjweaver</artifactId>
-			<version>${aspectj.version}</version>
-		</dependency>
-		<dependency>
 			<groupId>io.springfox</groupId>
 			<artifactId>springfox-boot-starter</artifactId>
 			<version>${springfox.boot.starter.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>commons-io</groupId>
+			<artifactId>commons-io</artifactId>
+			<version>${commons-io.version}</version>
 		</dependency>
 		<!-- Tests -->
 		<dependency>
@@ -102,6 +110,12 @@
 			<groupId>org.testcontainers</groupId>
 			<artifactId>junit-jupiter</artifactId>
 			<version>${testcontainers.version}</version>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>com.squareup.okhttp3</groupId>
+			<artifactId>mockwebserver</artifactId>
+			<version>${okhttp3.version}</version>
 			<scope>test</scope>
 		</dependency>
 		<dependency>
